@@ -1,0 +1,46 @@
+# Part 2. Run the detector/classifier
+
+## Part 2a. Feature extraction
+```{r }
+# Specify the folder where the training data will be saved
+TrainingDataFolderLocation <- "/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/TrainingDataFromRavenSelectionTables/"
+  
+TrainingDataMFCC <- MFCCFunction(input.dir= TrainingDataFolderLocation, min.freq = 400, max.freq = 1600,win.avg="TRUE")
+  
+  TrainingDataMFCC$class <- as.factor(TrainingDataMFCC$class)
+```
+  
+## Part 2b. Run DetectClassify  
+```{r }
+
+  TestFileDirectory <- '/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/GibbonTestFiles'
+  
+  OutputDirectory <-  "/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/DetectAndClassifyOutput"
+  
+  DetectAndClassify(input=TestFileDirectory,
+                    input.type='directory',
+                    feature.df=TrainingDataMFCC,
+                    model.type.list=c('SVM','RF'),
+                    tune = TRUE,
+                    short.wav.duration=300,
+                    target.signal = c("female.gibbon"),
+                    min.freq = 400, max.freq = 1600,
+                    noise.quantile.val=0.15,
+                    time.window.number =3,
+                    n.windows = 9, num.cep = 12,
+                    spectrogram.window =160,
+                    pattern.split = ".wav",
+                    min.signal.dur = 3,
+                    max.sound.event.dur = 25,
+                    maximum.separation =1,
+                    probability.thresh.svm = 0.15,
+                    probability.thresh.rf = 0.15,
+                    wav.output = "TRUE",
+                    output.dir =OutputDirectory,
+                    swift.time=TRUE,time.start=5,time.stop=10,
+                    write.csv.output=FALSE,verbose=TRUE,
+                    random.sample='NA')
+  
+
+```
+

@@ -1,0 +1,35 @@
+---
+title: "gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings"
+author: "Dena J. Clink"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: DenaJGibbon/gibbonR-tutorial
+# output:
+#   html_document:
+#     toc: true
+#     toc_depth: 2
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Getting started
+## You can install the development version from [GitHub](https://github.com/DenaJGibbon) with:
+```{r, echo=T,warning=FALSE, results='hide'}
+# install.packages("devtools")
+# devtools::install_github("DenaJGibbon/gibbonR")
+
+library(gibbonR)
+```
+
+
+
