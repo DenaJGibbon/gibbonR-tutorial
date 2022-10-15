@@ -19,3 +19,5 @@ part-3c.-calculate-and-plot-performance-metrics-using-rocr
 part-4.-data-visualization
 part-4a.-create-a-umap-plot-colored-by-class
 output
+package-summary
+package-installation
