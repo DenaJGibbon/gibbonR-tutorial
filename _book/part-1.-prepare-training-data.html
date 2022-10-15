@@ -1,430 +1,303 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 Part 1. Prepare Training Data | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings</title>
-  <meta name="description" content="2 Part 1. Prepare Training Data | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="2 Part 1. Prepare Training Data | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings" />
-  <meta property="og:type" content="book" />
-  
-  
-  <meta name="github-repo" content="DenaJGibbon/gibbonR-tutorial" />
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 Part 1. Prepare Training Data | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings" />
-  
-  
-  
-
-<meta name="author" content="Dena J. Clink" />
-
-
-<meta name="date" content="2022-10-15" />
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="index.html"/>
-<link rel="next" href="part-2.-run-the-detectorclassifier.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-
-
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-
-<link rel="stylesheet" href="style.css" type="text/css" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>2 Part 1. Prepare Training Data | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings</title>
+<meta name="author" content="Dena J. Clink">
+<meta name="generator" content="bookdown 0.26 with bs4_book()">
+<meta property="og:title" content="2 Part 1. Prepare Training Data | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2 Part 1. Prepare Training Data | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.3.1/transition.js"></script><script src="libs/bs3compat-0.3.1/tabs.js"></script><script src="libs/bs3compat-0.3.1/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<meta name="description" content="In ‘gibbonR’ there are two ways that you can format your training data. The first can be a set of labelled .wav clips with the class indicated in the name of the file (e.g., ‘gibbon_01.wav’ and...">
+<meta property="og:description" content="In ‘gibbonR’ there are two ways that you can format your training data. The first can be a set of labelled .wav clips with the class indicated in the name of the file (e.g., ‘gibbon_01.wav’ and...">
+<meta name="twitter:description" content="In ‘gibbonR’ there are two ways that you can format your training data. The first can be a set of labelled .wav clips with the class indicated in the name of the file (e.g., ‘gibbon_01.wav’ and...">
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
 
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
 
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li><a href="./"> gibbonR </a></li>
-
-<li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Getting started</a>
-<ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#you-can-install-the-development-version-from-github-with"><i class="fa fa-check"></i><b>1.1</b> You can install the development version from <span>GitHub</span> with:</a></li>
-</ul></li>
-<li class="chapter" data-level="2" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html"><i class="fa fa-check"></i><b>2</b> Part 1. Prepare Training Data</a>
-<ul>
-<li class="chapter" data-level="2.1" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#part-1a.-training-data-with-labeled-.wav-clips"><i class="fa fa-check"></i><b>2.1</b> Part 1A. Training Data with Labeled .wav clips</a>
-<ul>
-<li class="chapter" data-level="2.1.1" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#read-in-clips-and-calculate-mfccs"><i class="fa fa-check"></i><b>2.1.1</b> Read in clips and calculate MFCCs</a></li>
-<li class="chapter" data-level="2.1.2" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#compare-random-forest-and-support-vector-machine-for-supervised-classification"><i class="fa fa-check"></i><b>2.1.2</b> Compare Random Forest and Support Vector Machine for Supervised Classification</a></li>
-</ul></li>
-<li class="chapter" data-level="2.2" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#part-1b.-training-data-with-raven-selection-tables"><i class="fa fa-check"></i><b>2.2</b> Part 1B. Training Data with Raven Selection Tables</a>
-<ul>
-<li class="chapter" data-level="2.2.1" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#prepare-training-data-from-labeled-annotations"><i class="fa fa-check"></i><b>2.2.1</b> Prepare training data from labeled annotations</a></li>
-<li class="chapter" data-level="2.2.2" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#prepare-noise-training-data-from-files-without-target-signal"><i class="fa fa-check"></i><b>2.2.2</b> Prepare noise training data from files without target signal</a></li>
-<li class="chapter" data-level="2.2.3" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#now-read-in-clips-based-on-raven-selection-tables-and-calculate-mfccs"><i class="fa fa-check"></i><b>2.2.3</b> Now read in clips based on Raven Selection tables and calculate MFCCs</a></li>
-<li class="chapter" data-level="2.2.4" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#compare-random-forest-and-support-vector-machine-for-supervised-classification-1"><i class="fa fa-check"></i><b>2.2.4</b> Compare Random Forest and Support Vector Machine for Supervised Classification</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="3" data-path="part-2.-run-the-detectorclassifier.html"><a href="part-2.-run-the-detectorclassifier.html"><i class="fa fa-check"></i><b>3</b> Part 2. Run the detector/classifier</a>
-<ul>
-<li class="chapter" data-level="3.1" data-path="part-2.-run-the-detectorclassifier.html"><a href="part-2.-run-the-detectorclassifier.html#part-2a.-feature-extraction"><i class="fa fa-check"></i><b>3.1</b> Part 2a. Feature extraction</a></li>
-<li class="chapter" data-level="3.2" data-path="part-2.-run-the-detectorclassifier.html"><a href="part-2.-run-the-detectorclassifier.html#part-2b.-run-detectclassify"><i class="fa fa-check"></i><b>3.2</b> Part 2b. Run DetectClassify</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html"><i class="fa fa-check"></i><b>4</b> Part 3. Calculate performance metrics</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html#part-3a.-prepare-data-for-performance-metrics"><i class="fa fa-check"></i><b>4.1</b> Part 3a. Prepare data for performance metrics</a></li>
-<li class="chapter" data-level="4.2" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html#part-3b.-identify-true-and-false-positives"><i class="fa fa-check"></i><b>4.2</b> Part 3b. Identify true and false positives</a></li>
-<li class="chapter" data-level="4.3" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html#part-3c.-calculate-and-plot-performance-metrics-using-rocr"><i class="fa fa-check"></i><b>4.3</b> Part 3c. Calculate and plot performance metrics using ‘ROCR’</a></li>
-</ul></li>
-<li class="chapter" data-level="5" data-path="part-4.-data-visualization.html"><a href="part-4.-data-visualization.html"><i class="fa fa-check"></i><b>5</b> Part 4. Data visualization</a>
-<ul>
-<li class="chapter" data-level="5.1" data-path="part-4.-data-visualization.html"><a href="part-4.-data-visualization.html#part-4a.-create-a-umap-plot-colored-by-class"><i class="fa fa-check"></i><b>5.1</b> Part 4a. Create a UMAP plot colored by class</a></li>
-</ul></li>
-<li class="divider"></li>
-<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Getting started</a></li>
+<li><a class="active" href="part-1.-prepare-training-data.html"><span class="header-section-number">2</span> Part 1. Prepare Training Data</a></li>
+<li><a class="" href="part-2.-run-the-detectorclassifier.html"><span class="header-section-number">3</span> Part 2. Run the detector/classifier</a></li>
+<li><a class="" href="part-3.-calculate-performance-metrics.html"><span class="header-section-number">4</span> Part 3. Calculate performance metrics</a></li>
+<li><a class="" href="part-4.-data-visualization.html"><span class="header-section-number">5</span> Part 4. Data visualization</a></li>
 </ul>
 
+        <div class="book-extra">
+          
+        </div>
       </nav>
-    </div>
-
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings</a>
-          </h1>
-        </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="part-1.-prepare-training-data" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">2</span> Part 1. Prepare Training Data<a href="part-1.-prepare-training-data.html#part-1.-prepare-training-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="part-1.-prepare-training-data" class="section level1" number="2">
+<h1>
+<span class="header-section-number">2</span> Part 1. Prepare Training Data<a class="anchor" aria-label="anchor" href="#part-1.-prepare-training-data"><i class="fas fa-link"></i></a>
+</h1>
 <p>In ‘gibbonR’ there are two ways that you can format your training data. The first can be a set of labelled .wav clips with the class indicated in the name of the file (e.g., ‘gibbon_01.wav’ and ‘noise_01.wav’). The second is to have a folder of selection tables created in Raven Pro (K. Lisa Yang Center for Conservation Bioacoustics) and a folder with the associated ‘.wav’ files. For the second approach there must be an annotation column indicating the call type and it is assumed that all signals of interest are annotated, and the rest of the files contain only background noise.</p>
-<div id="part-1a.-training-data-with-labeled-.wav-clips" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> Part 1A. Training Data with Labeled .wav clips<a href="part-1.-prepare-training-data.html#part-1a.-training-data-with-labeled-.wav-clips" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="read-in-clips-and-calculate-mfccs" class="section level3 hasAnchor" number="2.1.1">
-<h3><span class="header-section-number">2.1.1</span> Read in clips and calculate MFCCs<a href="part-1.-prepare-training-data.html#read-in-clips-and-calculate-mfccs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="part-1.-prepare-training-data.html#cb2-1" aria-hidden="true" tabindex="-1"></a>TrainingWavFilesDir <span class="ot">&lt;-</span> </span>
-<span id="cb2-2"><a href="part-1.-prepare-training-data.html#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/MultipleSoundClasses/&quot;</span></span>
-<span id="cb2-3"><a href="part-1.-prepare-training-data.html#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="part-1.-prepare-training-data.html#cb2-4" aria-hidden="true" tabindex="-1"></a>trainingdata <span class="ot">&lt;-</span> gibbonR<span class="sc">::</span><span class="fu">MFCCFunction</span>(<span class="at">input.dir=</span>TrainingWavFilesDir, <span class="at">min.freq =</span> <span class="dv">400</span>, <span class="at">max.freq =</span> <span class="dv">1600</span>,<span class="at">win.avg=</span><span class="st">&quot;TRUE&quot;</span>)</span>
-<span id="cb2-5"><a href="part-1.-prepare-training-data.html#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="part-1.-prepare-training-data.html#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="part-1.-prepare-training-data.html#cb2-7" aria-hidden="true" tabindex="-1"></a>trainingdata<span class="sc">$</span>class <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(trainingdata<span class="sc">$</span>class)</span></code></pre></div>
+<div id="part-1a.-training-data-with-labeled-.wav-clips" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> Part 1A. Training Data with Labeled .wav clips<a class="anchor" aria-label="anchor" href="#part-1a.-training-data-with-labeled-.wav-clips"><i class="fas fa-link"></i></a>
+</h2>
+<div id="read-in-clips-and-calculate-mfccs" class="section level3" number="2.1.1">
+<h3>
+<span class="header-section-number">2.1.1</span> Read in clips and calculate MFCCs<a class="anchor" aria-label="anchor" href="#read-in-clips-and-calculate-mfccs"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">TrainingWavFilesDir</span> <span class="op">&lt;-</span> 
+  <span class="st">"/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/MultipleSoundClasses/"</span>
+
+<span class="va">trainingdata</span> <span class="op">&lt;-</span> <span class="fu">gibbonR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gibbonR/man/MFCCFunction.html">MFCCFunction</a></span><span class="op">(</span>input.dir<span class="op">=</span><span class="va">TrainingWavFilesDir</span>, min.freq <span class="op">=</span> <span class="fl">400</span>, max.freq <span class="op">=</span> <span class="fl">1600</span>,win.avg<span class="op">=</span><span class="st">"TRUE"</span><span class="op">)</span>
+
+
+<span class="va">trainingdata</span><span class="op">$</span><span class="va">class</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">trainingdata</span><span class="op">$</span><span class="va">class</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="compare-random-forest-and-support-vector-machine-for-supervised-classification" class="section level3 hasAnchor" number="2.1.2">
-<h3><span class="header-section-number">2.1.2</span> Compare Random Forest and Support Vector Machine for Supervised Classification<a href="part-1.-prepare-training-data.html#compare-random-forest-and-support-vector-machine-for-supervised-classification" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="part-1.-prepare-training-data.html#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-2"><a href="part-1.-prepare-training-data.html#cb3-2" aria-hidden="true" tabindex="-1"></a>trainingdata<span class="sc">$</span>class <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(trainingdata<span class="sc">$</span>class)</span>
-<span id="cb3-3"><a href="part-1.-prepare-training-data.html#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="part-1.-prepare-training-data.html#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="part-1.-prepare-training-data.html#cb3-5" aria-hidden="true" tabindex="-1"></a>ml.model.svm <span class="ot">&lt;-</span> e1071<span class="sc">::</span><span class="fu">svm</span>(trainingdata[, <span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(trainingdata)], trainingdata<span class="sc">$</span>class, <span class="at">kernel =</span> <span class="st">&quot;radial&quot;</span>, </span>
-<span id="cb3-6"><a href="part-1.-prepare-training-data.html#cb3-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">cross =</span> <span class="dv">25</span>,</span>
-<span id="cb3-7"><a href="part-1.-prepare-training-data.html#cb3-7" aria-hidden="true" tabindex="-1"></a>                           <span class="at">probability =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb3-8"><a href="part-1.-prepare-training-data.html#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="part-1.-prepare-training-data.html#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&#39;SVM accuracy&#39;</span>,ml.model.svm<span class="sc">$</span>tot.accuracy))</span>
-<span id="cb3-10"><a href="part-1.-prepare-training-data.html#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;SVM accuracy 88&quot;</span></span>
-<span id="cb3-11"><a href="part-1.-prepare-training-data.html#cb3-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-12"><a href="part-1.-prepare-training-data.html#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="part-1.-prepare-training-data.html#cb3-13" aria-hidden="true" tabindex="-1"></a>ml.model.rf <span class="ot">&lt;-</span> randomForest<span class="sc">::</span><span class="fu">randomForest</span>(<span class="at">x=</span>trainingdata[, <span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(trainingdata)], <span class="at">y =</span> trainingdata<span class="sc">$</span>class)</span>
-<span id="cb3-14"><a href="part-1.-prepare-training-data.html#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-15"><a href="part-1.-prepare-training-data.html#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-16"><a href="part-1.-prepare-training-data.html#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(ml.model.rf)</span>
-<span id="cb3-17"><a href="part-1.-prepare-training-data.html#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb3-18"><a href="part-1.-prepare-training-data.html#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Call:</span></span>
-<span id="cb3-19"><a href="part-1.-prepare-training-data.html#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  randomForest(x = trainingdata[, 2:ncol(trainingdata)], y = trainingdata$class) </span></span>
-<span id="cb3-20"><a href="part-1.-prepare-training-data.html#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                Type of random forest: classification</span></span>
-<span id="cb3-21"><a href="part-1.-prepare-training-data.html#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                      Number of trees: 500</span></span>
-<span id="cb3-22"><a href="part-1.-prepare-training-data.html#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; No. of variables tried at each split: 13</span></span>
-<span id="cb3-23"><a href="part-1.-prepare-training-data.html#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb3-24"><a href="part-1.-prepare-training-data.html#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         OOB estimate of  error rate: 10.67%</span></span>
-<span id="cb3-25"><a href="part-1.-prepare-training-data.html#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Confusion matrix:</span></span>
-<span id="cb3-26"><a href="part-1.-prepare-training-data.html#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;               female.gibbon leaf.monkey noise solo.gibbon class.error</span></span>
-<span id="cb3-27"><a href="part-1.-prepare-training-data.html#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; female.gibbon            17           0     1           2        0.15</span></span>
-<span id="cb3-28"><a href="part-1.-prepare-training-data.html#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; leaf.monkey               0          12     3           0        0.20</span></span>
-<span id="cb3-29"><a href="part-1.-prepare-training-data.html#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; noise                     0           0    19           1        0.05</span></span>
-<span id="cb3-30"><a href="part-1.-prepare-training-data.html#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; solo.gibbon               0           1     0          19        0.05</span></span></code></pre></div>
+<div id="compare-random-forest-and-support-vector-machine-for-supervised-classification" class="section level3" number="2.1.2">
+<h3>
+<span class="header-section-number">2.1.2</span> Compare Random Forest and Support Vector Machine for Supervised Classification<a class="anchor" aria-label="anchor" href="#compare-random-forest-and-support-vector-machine-for-supervised-classification"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="va">trainingdata</span><span class="op">$</span><span class="va">class</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">trainingdata</span><span class="op">$</span><span class="va">class</span><span class="op">)</span>
+
+
+<span class="va">ml.model.svm</span> <span class="op">&lt;-</span> <span class="fu">e1071</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/e1071/man/svm.html">svm</a></span><span class="op">(</span><span class="va">trainingdata</span><span class="op">[</span>, <span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">trainingdata</span><span class="op">)</span><span class="op">]</span>, <span class="va">trainingdata</span><span class="op">$</span><span class="va">class</span>, kernel <span class="op">=</span> <span class="st">"radial"</span>, 
+                           cross <span class="op">=</span> <span class="fl">25</span>,
+                           probability <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">'SVM accuracy'</span>,<span class="va">ml.model.svm</span><span class="op">$</span><span class="va">tot.accuracy</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; [1] "SVM accuracy 88"</span>
+
+
+<span class="va">ml.model.rf</span> <span class="op">&lt;-</span> <span class="fu">randomForest</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/randomForest.html">randomForest</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">trainingdata</span><span class="op">[</span>, <span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">trainingdata</span><span class="op">)</span><span class="op">]</span>, y <span class="op">=</span> <span class="va">trainingdata</span><span class="op">$</span><span class="va">class</span><span class="op">)</span>
+
+
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ml.model.rf</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Call:</span>
+<span class="co">#&gt;  randomForest(x = trainingdata[, 2:ncol(trainingdata)], y = trainingdata$class) </span>
+<span class="co">#&gt;                Type of random forest: classification</span>
+<span class="co">#&gt;                      Number of trees: 500</span>
+<span class="co">#&gt; No. of variables tried at each split: 13</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;         OOB estimate of  error rate: 13.33%</span>
+<span class="co">#&gt; Confusion matrix:</span>
+<span class="co">#&gt;               female.gibbon leaf.monkey noise solo.gibbon class.error</span>
+<span class="co">#&gt; female.gibbon            17           0     2           1   0.1500000</span>
+<span class="co">#&gt; leaf.monkey               0          11     4           0   0.2666667</span>
+<span class="co">#&gt; noise                     0           0    18           2   0.1000000</span>
+<span class="co">#&gt; solo.gibbon               0           1     0          19   0.0500000</span></code></pre></div>
 </div>
 </div>
-<div id="part-1b.-training-data-with-raven-selection-tables" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> Part 1B. Training Data with Raven Selection Tables<a href="part-1.-prepare-training-data.html#part-1b.-training-data-with-raven-selection-tables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="prepare-training-data-from-labeled-annotations" class="section level3 hasAnchor" number="2.2.1">
-<h3><span class="header-section-number">2.2.1</span> Prepare training data from labeled annotations<a href="part-1.-prepare-training-data.html#prepare-training-data-from-labeled-annotations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="part-1.-prepare-training-data.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify the folder where the training data will be saved</span></span>
-<span id="cb4-2"><a href="part-1.-prepare-training-data.html#cb4-2" aria-hidden="true" tabindex="-1"></a>TrainingDataFolderLocation <span class="ot">&lt;-</span> <span class="st">&quot;/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/TrainingDataFromRavenSelectionTables&quot;</span></span>
-<span id="cb4-3"><a href="part-1.-prepare-training-data.html#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="part-1.-prepare-training-data.html#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Directory with annotated selection tables</span></span>
-<span id="cb4-5"><a href="part-1.-prepare-training-data.html#cb4-5" aria-hidden="true" tabindex="-1"></a>AnnotatedSelectionTables <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">&quot;/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/SelectionTables/GibbonTrainingSelectionTables/&quot;</span>,</span>
-<span id="cb4-6"><a href="part-1.-prepare-training-data.html#cb4-6" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">full.names =</span> T)</span>
-<span id="cb4-7"><a href="part-1.-prepare-training-data.html#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="part-1.-prepare-training-data.html#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Directory with corresponding .wav files</span></span>
-<span id="cb4-9"><a href="part-1.-prepare-training-data.html#cb4-9" aria-hidden="true" tabindex="-1"></a>AnnotatedWaveFiles <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">&quot;/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/GibbonTrainingFiles/&quot;</span>,<span class="at">full.names =</span> T)</span>
-<span id="cb4-10"><a href="part-1.-prepare-training-data.html#cb4-10" aria-hidden="true" tabindex="-1"></a>AnnotatedWaveFilesShort <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">&quot;/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/GibbonTrainingFiles/&quot;</span>,<span class="at">full.names =</span> F)</span>
-<span id="cb4-11"><a href="part-1.-prepare-training-data.html#cb4-11" aria-hidden="true" tabindex="-1"></a>AnnotatedWaveFilesShort <span class="ot">&lt;-</span> <span class="fu">str_split_fixed</span>(AnnotatedWaveFilesShort,<span class="at">pattern =</span> <span class="st">&#39;.wav&#39;</span>, <span class="at">n=</span><span class="dv">2</span>)[,<span class="dv">1</span>]</span>
-<span id="cb4-12"><a href="part-1.-prepare-training-data.html#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-13"><a href="part-1.-prepare-training-data.html#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Loop to cut out the corresponding annotations into short clips</span></span>
-<span id="cb4-14"><a href="part-1.-prepare-training-data.html#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span> <span class="fu">length</span>(AnnotatedSelectionTables)){</span>
-<span id="cb4-15"><a href="part-1.-prepare-training-data.html#cb4-15" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-16"><a href="part-1.-prepare-training-data.html#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Read in selection table</span></span>
-<span id="cb4-17"><a href="part-1.-prepare-training-data.html#cb4-17" aria-hidden="true" tabindex="-1"></a>  TempSelectionTable <span class="ot">&lt;-</span> <span class="fu">read.delim2</span>(AnnotatedSelectionTables[i])</span>
-<span id="cb4-18"><a href="part-1.-prepare-training-data.html#cb4-18" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-19"><a href="part-1.-prepare-training-data.html#cb4-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Find the corresponding soundfile</span></span>
-<span id="cb4-20"><a href="part-1.-prepare-training-data.html#cb4-20" aria-hidden="true" tabindex="-1"></a>  SoundFileIndex <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">str_detect</span>(AnnotatedSelectionTables[i],AnnotatedWaveFilesShort))</span>
-<span id="cb4-21"><a href="part-1.-prepare-training-data.html#cb4-21" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-22"><a href="part-1.-prepare-training-data.html#cb4-22" aria-hidden="true" tabindex="-1"></a>  TempAnnotateWave <span class="ot">&lt;-</span> <span class="fu">readWave</span>(AnnotatedWaveFiles[SoundFileIndex])</span>
-<span id="cb4-23"><a href="part-1.-prepare-training-data.html#cb4-23" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-24"><a href="part-1.-prepare-training-data.html#cb4-24" aria-hidden="true" tabindex="-1"></a>  ShortSoundClips <span class="ot">&lt;-</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(TempSelectionTable),</span>
-<span id="cb4-25"><a href="part-1.-prepare-training-data.html#cb4-25" aria-hidden="true" tabindex="-1"></a>                                <span class="cf">function</span>(j) <span class="fu">extractWave</span>(TempAnnotateWave,</span>
-<span id="cb4-26"><a href="part-1.-prepare-training-data.html#cb4-26" aria-hidden="true" tabindex="-1"></a>                                                        <span class="at">from=</span> <span class="fu">as.numeric</span>(TempSelectionTable[j,]<span class="sc">$</span>Begin.Time..s.),</span>
-<span id="cb4-27"><a href="part-1.-prepare-training-data.html#cb4-27" aria-hidden="true" tabindex="-1"></a>                                                        <span class="at">to=</span><span class="fu">as.numeric</span>(TempSelectionTable[j,]<span class="sc">$</span> End.Time..s.),</span>
-<span id="cb4-28"><a href="part-1.-prepare-training-data.html#cb4-28" aria-hidden="true" tabindex="-1"></a>                                                        <span class="at">xunit =</span> <span class="fu">c</span>(<span class="st">&quot;time&quot;</span>),<span class="at">plot=</span>F,<span class="at">output=</span><span class="st">&quot;Wave&quot;</span>))</span>
-<span id="cb4-29"><a href="part-1.-prepare-training-data.html#cb4-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Write wave files to folder</span></span>
-<span id="cb4-30"><a href="part-1.-prepare-training-data.html#cb4-30" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span>(k <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(ShortSoundClips)){</span>
-<span id="cb4-31"><a href="part-1.-prepare-training-data.html#cb4-31" aria-hidden="true" tabindex="-1"></a>    TempClip <span class="ot">&lt;-</span> ShortSoundClips[[k]]</span>
-<span id="cb4-32"><a href="part-1.-prepare-training-data.html#cb4-32" aria-hidden="true" tabindex="-1"></a>    WavFileName <span class="ot">&lt;-</span> <span class="fu">paste</span>(TrainingDataFolderLocation,<span class="st">&#39;/female.gibbon_&#39;</span>, k, <span class="st">&#39;.wav&#39;</span>,<span class="at">sep=</span><span class="st">&quot;&quot;</span>)</span>
-<span id="cb4-33"><a href="part-1.-prepare-training-data.html#cb4-33" aria-hidden="true" tabindex="-1"></a>    <span class="fu">writeWave</span>(TempClip,WavFileName,<span class="at">extensible =</span> F)</span>
-<span id="cb4-34"><a href="part-1.-prepare-training-data.html#cb4-34" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb4-35"><a href="part-1.-prepare-training-data.html#cb4-35" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-36"><a href="part-1.-prepare-training-data.html#cb4-36" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-37"><a href="part-1.-prepare-training-data.html#cb4-37" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div id="part-1b.-training-data-with-raven-selection-tables" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> Part 1B. Training Data with Raven Selection Tables<a class="anchor" aria-label="anchor" href="#part-1b.-training-data-with-raven-selection-tables"><i class="fas fa-link"></i></a>
+</h2>
+<div id="prepare-training-data-from-labeled-annotations" class="section level3" number="2.2.1">
+<h3>
+<span class="header-section-number">2.2.1</span> Prepare training data from labeled annotations<a class="anchor" aria-label="anchor" href="#prepare-training-data-from-labeled-annotations"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Specify the folder where the training data will be saved</span>
+<span class="va">TrainingDataFolderLocation</span> <span class="op">&lt;-</span> <span class="st">"/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/TrainingDataFromRavenSelectionTables"</span>
+
+<span class="co"># Directory with annotated selection tables</span>
+<span class="va">AnnotatedSelectionTables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="st">"/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/SelectionTables/GibbonTrainingSelectionTables/"</span>,
+                                       full.names <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+
+<span class="co"># Directory with corresponding .wav files</span>
+<span class="va">AnnotatedWaveFiles</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="st">"/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/GibbonTrainingFiles/"</span>,full.names <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+<span class="va">AnnotatedWaveFilesShort</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="st">"/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/GibbonTrainingFiles/"</span>,full.names <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
+<span class="va">AnnotatedWaveFilesShort</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_split.html">str_split_fixed</a></span><span class="op">(</span><span class="va">AnnotatedWaveFilesShort</span>,pattern <span class="op">=</span> <span class="st">'.wav'</span>, n<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>
+
+<span class="co"># Loop to cut out the corresponding annotations into short clips</span>
+<span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">AnnotatedSelectionTables</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
+  
+  <span class="co"># Read in selection table</span>
+  <span class="va">TempSelectionTable</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.delim2</a></span><span class="op">(</span><span class="va">AnnotatedSelectionTables</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span>
+  
+  <span class="co"># Find the corresponding soundfile</span>
+  <span class="va">SoundFileIndex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">AnnotatedSelectionTables</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,<span class="va">AnnotatedWaveFilesShort</span><span class="op">)</span><span class="op">)</span>
+  
+  <span class="va">TempAnnotateWave</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/tuneR/man/readWave.html">readWave</a></span><span class="op">(</span><span class="va">AnnotatedWaveFiles</span><span class="op">[</span><span class="va">SoundFileIndex</span><span class="op">]</span><span class="op">)</span>
+  
+  <span class="va">ShortSoundClips</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">TempSelectionTable</span><span class="op">)</span>,
+                                <span class="kw">function</span><span class="op">(</span><span class="va">j</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/pkg/tuneR/man/extractWave.html">extractWave</a></span><span class="op">(</span><span class="va">TempAnnotateWave</span>,
+                                                        from<span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">TempSelectionTable</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span><span class="op">$</span><span class="va">Begin.Time..s.</span><span class="op">)</span>,
+                                                        to<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">TempSelectionTable</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span><span class="op">$</span> <span class="va">End.Time..s.</span><span class="op">)</span>,
+                                                        xunit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"time"</span><span class="op">)</span>,plot<span class="op">=</span><span class="cn">F</span>,output<span class="op">=</span><span class="st">"Wave"</span><span class="op">)</span><span class="op">)</span>
+  <span class="co"># Write wave files to folder</span>
+  <span class="kw">for</span><span class="op">(</span><span class="va">k</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">ShortSoundClips</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
+    <span class="va">TempClip</span> <span class="op">&lt;-</span> <span class="va">ShortSoundClips</span><span class="op">[[</span><span class="va">k</span><span class="op">]</span><span class="op">]</span>
+    <span class="va">WavFileName</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="va">TrainingDataFolderLocation</span>,<span class="st">'/female.gibbon_'</span>, <span class="va">k</span>, <span class="st">'.wav'</span>,sep<span class="op">=</span><span class="st">""</span><span class="op">)</span>
+    <span class="fu"><a href="https://rdrr.io/pkg/tuneR/man/writeWave.html">writeWave</a></span><span class="op">(</span><span class="va">TempClip</span>,<span class="va">WavFileName</span>,extensible <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
+  <span class="op">}</span>
+  
+  
+<span class="op">}</span></code></pre></div>
 </div>
-<div id="prepare-noise-training-data-from-files-without-target-signal" class="section level3 hasAnchor" number="2.2.2">
-<h3><span class="header-section-number">2.2.2</span> Prepare noise training data from files without target signal<a href="part-1.-prepare-training-data.html#prepare-noise-training-data-from-files-without-target-signal" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="part-1.-prepare-training-data.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify the folder where the training data will be saved</span></span>
-<span id="cb5-2"><a href="part-1.-prepare-training-data.html#cb5-2" aria-hidden="true" tabindex="-1"></a>TrainingDataFolderLocation <span class="ot">&lt;-</span> <span class="st">&quot;/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/TrainingDataFromRavenSelectionTables/&quot;</span></span>
-<span id="cb5-3"><a href="part-1.-prepare-training-data.html#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="part-1.-prepare-training-data.html#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Directory with annotated selection tables</span></span>
-<span id="cb5-5"><a href="part-1.-prepare-training-data.html#cb5-5" aria-hidden="true" tabindex="-1"></a>NoiseSelectionTables <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">&quot;/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/SelectionTables/NoiseSelectionTables/&quot;</span>,</span>
-<span id="cb5-6"><a href="part-1.-prepare-training-data.html#cb5-6" aria-hidden="true" tabindex="-1"></a>                                       <span class="at">full.names =</span> T)</span>
-<span id="cb5-7"><a href="part-1.-prepare-training-data.html#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="part-1.-prepare-training-data.html#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Directory with corresponding .wav files</span></span>
-<span id="cb5-9"><a href="part-1.-prepare-training-data.html#cb5-9" aria-hidden="true" tabindex="-1"></a>NoiseWaveFiles <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">&quot;/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/NoiseFiles/&quot;</span>,<span class="at">full.names =</span> T)</span>
-<span id="cb5-10"><a href="part-1.-prepare-training-data.html#cb5-10" aria-hidden="true" tabindex="-1"></a>NoiseWaveFilesShort <span class="ot">&lt;-</span> <span class="fu">list.files</span>(<span class="st">&quot;/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/NoiseFiles/&quot;</span>,<span class="at">full.names =</span> F)</span>
-<span id="cb5-11"><a href="part-1.-prepare-training-data.html#cb5-11" aria-hidden="true" tabindex="-1"></a>NoiseWaveFilesShort <span class="ot">&lt;-</span> <span class="fu">str_split_fixed</span>(NoiseWaveFilesShort,<span class="at">pattern =</span> <span class="st">&#39;.wav&#39;</span>, <span class="at">n=</span><span class="dv">2</span>)[,<span class="dv">1</span>]</span>
-<span id="cb5-12"><a href="part-1.-prepare-training-data.html#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-13"><a href="part-1.-prepare-training-data.html#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(NoiseSelectionTables)){</span>
-<span id="cb5-14"><a href="part-1.-prepare-training-data.html#cb5-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-15"><a href="part-1.-prepare-training-data.html#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Find the corresponding soundfile</span></span>
-<span id="cb5-16"><a href="part-1.-prepare-training-data.html#cb5-16" aria-hidden="true" tabindex="-1"></a>  SoundFileIndex <span class="ot">&lt;-</span> <span class="fu">which</span>(<span class="fu">str_detect</span>(NoiseSelectionTables[i],NoiseWaveFilesShort))</span>
-<span id="cb5-17"><a href="part-1.-prepare-training-data.html#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-18"><a href="part-1.-prepare-training-data.html#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">DetectBLED</span>(<span class="at">input=</span>NoiseWaveFiles[SoundFileIndex],</span>
-<span id="cb5-19"><a href="part-1.-prepare-training-data.html#cb5-19" aria-hidden="true" tabindex="-1"></a>           <span class="at">min.freq =</span> <span class="dv">400</span>, </span>
-<span id="cb5-20"><a href="part-1.-prepare-training-data.html#cb5-20" aria-hidden="true" tabindex="-1"></a>           <span class="at">max.freq =</span> <span class="dv">1600</span>,</span>
-<span id="cb5-21"><a href="part-1.-prepare-training-data.html#cb5-21" aria-hidden="true" tabindex="-1"></a>           <span class="at">noise.quantile.val=</span><span class="fl">0.3</span>,</span>
-<span id="cb5-22"><a href="part-1.-prepare-training-data.html#cb5-22" aria-hidden="true" tabindex="-1"></a>           <span class="at">file.type=</span><span class="st">&#39;wav&#39;</span>,</span>
-<span id="cb5-23"><a href="part-1.-prepare-training-data.html#cb5-23" aria-hidden="true" tabindex="-1"></a>           <span class="at">spectrogram.window =</span><span class="dv">512</span>,</span>
-<span id="cb5-24"><a href="part-1.-prepare-training-data.html#cb5-24" aria-hidden="true" tabindex="-1"></a>           <span class="at">pattern.split =</span> <span class="st">&quot;.wav&quot;</span>, </span>
-<span id="cb5-25"><a href="part-1.-prepare-training-data.html#cb5-25" aria-hidden="true" tabindex="-1"></a>           <span class="at">min.signal.dur =</span> <span class="dv">3</span>,</span>
-<span id="cb5-26"><a href="part-1.-prepare-training-data.html#cb5-26" aria-hidden="true" tabindex="-1"></a>           <span class="at">max.sound.event.dur =</span> <span class="dv">12</span>, </span>
-<span id="cb5-27"><a href="part-1.-prepare-training-data.html#cb5-27" aria-hidden="true" tabindex="-1"></a>           <span class="at">output =</span> <span class="st">&quot;wav&quot;</span>,</span>
-<span id="cb5-28"><a href="part-1.-prepare-training-data.html#cb5-28" aria-hidden="true" tabindex="-1"></a>           <span class="at">wav.output =</span> <span class="st">&quot;TRUE&quot;</span>, </span>
-<span id="cb5-29"><a href="part-1.-prepare-training-data.html#cb5-29" aria-hidden="true" tabindex="-1"></a>           <span class="at">output.dir =</span> TrainingDataFolderLocation,</span>
-<span id="cb5-30"><a href="part-1.-prepare-training-data.html#cb5-30" aria-hidden="true" tabindex="-1"></a>           <span class="at">swift.time=</span><span class="cn">TRUE</span>,</span>
-<span id="cb5-31"><a href="part-1.-prepare-training-data.html#cb5-31" aria-hidden="true" tabindex="-1"></a>           <span class="at">time.start=</span><span class="dv">06</span>,</span>
-<span id="cb5-32"><a href="part-1.-prepare-training-data.html#cb5-32" aria-hidden="true" tabindex="-1"></a>           <span class="at">time.stop=</span><span class="dv">11</span>,</span>
-<span id="cb5-33"><a href="part-1.-prepare-training-data.html#cb5-33" aria-hidden="true" tabindex="-1"></a>           <span class="at">write.csv.output=</span><span class="cn">TRUE</span>,</span>
-<span id="cb5-34"><a href="part-1.-prepare-training-data.html#cb5-34" aria-hidden="true" tabindex="-1"></a>           <span class="at">verbose=</span><span class="cn">TRUE</span>,</span>
-<span id="cb5-35"><a href="part-1.-prepare-training-data.html#cb5-35" aria-hidden="true" tabindex="-1"></a>           <span class="at">random.sample=</span><span class="cn">FALSE</span>)</span>
-<span id="cb5-36"><a href="part-1.-prepare-training-data.html#cb5-36" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div id="prepare-noise-training-data-from-files-without-target-signal" class="section level3" number="2.2.2">
+<h3>
+<span class="header-section-number">2.2.2</span> Prepare noise training data from files without target signal<a class="anchor" aria-label="anchor" href="#prepare-noise-training-data-from-files-without-target-signal"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Specify the folder where the training data will be saved</span>
+<span class="va">TrainingDataFolderLocation</span> <span class="op">&lt;-</span> <span class="st">"/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/TrainingDataFromRavenSelectionTables/"</span>
+
+<span class="co"># Directory with annotated selection tables</span>
+<span class="va">NoiseSelectionTables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="st">"/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/SelectionTables/NoiseSelectionTables/"</span>,
+                                       full.names <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+
+<span class="co"># Directory with corresponding .wav files</span>
+<span class="va">NoiseWaveFiles</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="st">"/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/NoiseFiles/"</span>,full.names <span class="op">=</span> <span class="cn">T</span><span class="op">)</span>
+<span class="va">NoiseWaveFilesShort</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html">list.files</a></span><span class="op">(</span><span class="st">"/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/NoiseFiles/"</span>,full.names <span class="op">=</span> <span class="cn">F</span><span class="op">)</span>
+<span class="va">NoiseWaveFilesShort</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_split.html">str_split_fixed</a></span><span class="op">(</span><span class="va">NoiseWaveFilesShort</span>,pattern <span class="op">=</span> <span class="st">'.wav'</span>, n<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>
+
+<span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">NoiseSelectionTables</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
+  
+  <span class="co"># Find the corresponding soundfile</span>
+  <span class="va">SoundFileIndex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">NoiseSelectionTables</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,<span class="va">NoiseWaveFilesShort</span><span class="op">)</span><span class="op">)</span>
+
+  <span class="fu"><a href="https://rdrr.io/pkg/gibbonR/man/DetectBLED.html">DetectBLED</a></span><span class="op">(</span>input<span class="op">=</span><span class="va">NoiseWaveFiles</span><span class="op">[</span><span class="va">SoundFileIndex</span><span class="op">]</span>,
+           min.freq <span class="op">=</span> <span class="fl">400</span>, 
+           max.freq <span class="op">=</span> <span class="fl">1600</span>,
+           noise.quantile.val<span class="op">=</span><span class="fl">0.3</span>,
+           file.type<span class="op">=</span><span class="st">'wav'</span>,
+           spectrogram.window <span class="op">=</span><span class="fl">512</span>,
+           pattern.split <span class="op">=</span> <span class="st">".wav"</span>, 
+           min.signal.dur <span class="op">=</span> <span class="fl">3</span>,
+           max.sound.event.dur <span class="op">=</span> <span class="fl">12</span>, 
+           output <span class="op">=</span> <span class="st">"wav"</span>,
+           wav.output <span class="op">=</span> <span class="st">"TRUE"</span>, 
+           output.dir <span class="op">=</span> <span class="va">TrainingDataFolderLocation</span>,
+           swift.time<span class="op">=</span><span class="cn">TRUE</span>,
+           time.start<span class="op">=</span><span class="fl">06</span>,
+           time.stop<span class="op">=</span><span class="fl">11</span>,
+           write.csv.output<span class="op">=</span><span class="cn">TRUE</span>,
+           verbose<span class="op">=</span><span class="cn">TRUE</span>,
+           random.sample<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
 </div>
-<div id="now-read-in-clips-based-on-raven-selection-tables-and-calculate-mfccs" class="section level3 hasAnchor" number="2.2.3">
-<h3><span class="header-section-number">2.2.3</span> Now read in clips based on Raven Selection tables and calculate MFCCs<a href="part-1.-prepare-training-data.html#now-read-in-clips-based-on-raven-selection-tables-and-calculate-mfccs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="part-1.-prepare-training-data.html#cb6-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-2"><a href="part-1.-prepare-training-data.html#cb6-2" aria-hidden="true" tabindex="-1"></a>TrainingWavFilesDir <span class="ot">&lt;-</span> </span>
-<span id="cb6-3"><a href="part-1.-prepare-training-data.html#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/TrainingDataFromRavenSelectionTables/&quot;</span></span>
-<span id="cb6-4"><a href="part-1.-prepare-training-data.html#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="part-1.-prepare-training-data.html#cb6-5" aria-hidden="true" tabindex="-1"></a>trainingdata <span class="ot">&lt;-</span> gibbonR<span class="sc">::</span><span class="fu">MFCCFunction</span>(<span class="at">input.dir=</span>TrainingWavFilesDir, <span class="at">min.freq =</span> <span class="dv">400</span>, <span class="at">max.freq =</span> <span class="dv">1600</span>,<span class="at">win.avg=</span><span class="st">&quot;TRUE&quot;</span>)</span>
-<span id="cb6-6"><a href="part-1.-prepare-training-data.html#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="part-1.-prepare-training-data.html#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="part-1.-prepare-training-data.html#cb6-8" aria-hidden="true" tabindex="-1"></a>trainingdata<span class="sc">$</span>class <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(trainingdata<span class="sc">$</span>class)</span></code></pre></div>
+<div id="now-read-in-clips-based-on-raven-selection-tables-and-calculate-mfccs" class="section level3" number="2.2.3">
+<h3>
+<span class="header-section-number">2.2.3</span> Now read in clips based on Raven Selection tables and calculate MFCCs<a class="anchor" aria-label="anchor" href="#now-read-in-clips-based-on-raven-selection-tables-and-calculate-mfccs"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="va">TrainingWavFilesDir</span> <span class="op">&lt;-</span> 
+  <span class="st">"/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/TrainingDataFromRavenSelectionTables/"</span>
+
+<span class="va">trainingdata</span> <span class="op">&lt;-</span> <span class="fu">gibbonR</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gibbonR/man/MFCCFunction.html">MFCCFunction</a></span><span class="op">(</span>input.dir<span class="op">=</span><span class="va">TrainingWavFilesDir</span>, min.freq <span class="op">=</span> <span class="fl">400</span>, max.freq <span class="op">=</span> <span class="fl">1600</span>,win.avg<span class="op">=</span><span class="st">"TRUE"</span><span class="op">)</span>
+
+
+<span class="va">trainingdata</span><span class="op">$</span><span class="va">class</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">trainingdata</span><span class="op">$</span><span class="va">class</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="compare-random-forest-and-support-vector-machine-for-supervised-classification-1" class="section level3 hasAnchor" number="2.2.4">
-<h3><span class="header-section-number">2.2.4</span> Compare Random Forest and Support Vector Machine for Supervised Classification<a href="part-1.-prepare-training-data.html#compare-random-forest-and-support-vector-machine-for-supervised-classification-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="part-1.-prepare-training-data.html#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-2"><a href="part-1.-prepare-training-data.html#cb7-2" aria-hidden="true" tabindex="-1"></a>trainingdata<span class="sc">$</span>class <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(trainingdata<span class="sc">$</span>class)</span>
-<span id="cb7-3"><a href="part-1.-prepare-training-data.html#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="part-1.-prepare-training-data.html#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="part-1.-prepare-training-data.html#cb7-5" aria-hidden="true" tabindex="-1"></a>ml.model.svm <span class="ot">&lt;-</span> e1071<span class="sc">::</span><span class="fu">svm</span>(trainingdata[, <span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(trainingdata)], trainingdata<span class="sc">$</span>class, <span class="at">kernel =</span> <span class="st">&quot;radial&quot;</span>, </span>
-<span id="cb7-6"><a href="part-1.-prepare-training-data.html#cb7-6" aria-hidden="true" tabindex="-1"></a>                           <span class="at">cross =</span> <span class="dv">25</span>,</span>
-<span id="cb7-7"><a href="part-1.-prepare-training-data.html#cb7-7" aria-hidden="true" tabindex="-1"></a>                           <span class="at">probability =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb7-8"><a href="part-1.-prepare-training-data.html#cb7-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-9"><a href="part-1.-prepare-training-data.html#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">&#39;SVM accuracy&#39;</span>,ml.model.svm<span class="sc">$</span>tot.accuracy))</span>
-<span id="cb7-10"><a href="part-1.-prepare-training-data.html#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;SVM accuracy 98.1132075471698&quot;</span></span>
-<span id="cb7-11"><a href="part-1.-prepare-training-data.html#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-12"><a href="part-1.-prepare-training-data.html#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-13"><a href="part-1.-prepare-training-data.html#cb7-13" aria-hidden="true" tabindex="-1"></a>ml.model.rf <span class="ot">&lt;-</span> randomForest<span class="sc">::</span><span class="fu">randomForest</span>(<span class="at">x=</span>trainingdata[, <span class="dv">2</span><span class="sc">:</span><span class="fu">ncol</span>(trainingdata)], <span class="at">y =</span> trainingdata<span class="sc">$</span>class)</span>
-<span id="cb7-14"><a href="part-1.-prepare-training-data.html#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-15"><a href="part-1.-prepare-training-data.html#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-16"><a href="part-1.-prepare-training-data.html#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(ml.model.rf)</span>
-<span id="cb7-17"><a href="part-1.-prepare-training-data.html#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb7-18"><a href="part-1.-prepare-training-data.html#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Call:</span></span>
-<span id="cb7-19"><a href="part-1.-prepare-training-data.html#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  randomForest(x = trainingdata[, 2:ncol(trainingdata)], y = trainingdata$class) </span></span>
-<span id="cb7-20"><a href="part-1.-prepare-training-data.html#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                Type of random forest: classification</span></span>
-<span id="cb7-21"><a href="part-1.-prepare-training-data.html#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                      Number of trees: 500</span></span>
-<span id="cb7-22"><a href="part-1.-prepare-training-data.html#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; No. of variables tried at each split: 13</span></span>
-<span id="cb7-23"><a href="part-1.-prepare-training-data.html#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb7-24"><a href="part-1.-prepare-training-data.html#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         OOB estimate of  error rate: 3.77%</span></span>
-<span id="cb7-25"><a href="part-1.-prepare-training-data.html#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Confusion matrix:</span></span>
-<span id="cb7-26"><a href="part-1.-prepare-training-data.html#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;               female.gibbon noise class.error</span></span>
-<span id="cb7-27"><a href="part-1.-prepare-training-data.html#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; female.gibbon            24     2  0.07692308</span></span>
-<span id="cb7-28"><a href="part-1.-prepare-training-data.html#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; noise                     0    27  0.00000000</span></span></code></pre></div>
+<div id="compare-random-forest-and-support-vector-machine-for-supervised-classification-1" class="section level3" number="2.2.4">
+<h3>
+<span class="header-section-number">2.2.4</span> Compare Random Forest and Support Vector Machine for Supervised Classification<a class="anchor" aria-label="anchor" href="#compare-random-forest-and-support-vector-machine-for-supervised-classification-1"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R">
+<span class="va">trainingdata</span><span class="op">$</span><span class="va">class</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">trainingdata</span><span class="op">$</span><span class="va">class</span><span class="op">)</span>
+
+
+<span class="va">ml.model.svm</span> <span class="op">&lt;-</span> <span class="fu">e1071</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/e1071/man/svm.html">svm</a></span><span class="op">(</span><span class="va">trainingdata</span><span class="op">[</span>, <span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">trainingdata</span><span class="op">)</span><span class="op">]</span>, <span class="va">trainingdata</span><span class="op">$</span><span class="va">class</span>, kernel <span class="op">=</span> <span class="st">"radial"</span>, 
+                           cross <span class="op">=</span> <span class="fl">25</span>,
+                           probability <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">'SVM accuracy'</span>,<span class="va">ml.model.svm</span><span class="op">$</span><span class="va">tot.accuracy</span><span class="op">)</span><span class="op">)</span>
+<span class="co">#&gt; [1] "SVM accuracy 98.1132075471698"</span>
+
+
+<span class="va">ml.model.rf</span> <span class="op">&lt;-</span> <span class="fu">randomForest</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/randomForest/man/randomForest.html">randomForest</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">trainingdata</span><span class="op">[</span>, <span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span><span class="op">(</span><span class="va">trainingdata</span><span class="op">)</span><span class="op">]</span>, y <span class="op">=</span> <span class="va">trainingdata</span><span class="op">$</span><span class="va">class</span><span class="op">)</span>
+
+
+<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ml.model.rf</span><span class="op">)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Call:</span>
+<span class="co">#&gt;  randomForest(x = trainingdata[, 2:ncol(trainingdata)], y = trainingdata$class) </span>
+<span class="co">#&gt;                Type of random forest: classification</span>
+<span class="co">#&gt;                      Number of trees: 500</span>
+<span class="co">#&gt; No. of variables tried at each split: 13</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;         OOB estimate of  error rate: 3.77%</span>
+<span class="co">#&gt; Confusion matrix:</span>
+<span class="co">#&gt;               female.gibbon noise class.error</span>
+<span class="co">#&gt; female.gibbon            25     1  0.03846154</span>
+<span class="co">#&gt; noise                     1    26  0.03703704</span></code></pre></div>
 
 </div>
 </div>
 </div>
-            </section>
+  <div class="chapter-nav">
+<div class="prev"><a href="index.html"><span class="header-section-number">1</span> Getting started</a></div>
+<div class="next"><a href="part-2.-run-the-detectorclassifier.html"><span class="header-section-number">3</span> Part 2. Run the detector/classifier</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#part-1.-prepare-training-data"><span class="header-section-number">2</span> Part 1. Prepare Training Data</a></li>
+<li>
+<a class="nav-link" href="#part-1a.-training-data-with-labeled-.wav-clips"><span class="header-section-number">2.1</span> Part 1A. Training Data with Labeled .wav clips</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#read-in-clips-and-calculate-mfccs"><span class="header-section-number">2.1.1</span> Read in clips and calculate MFCCs</a></li>
+<li><a class="nav-link" href="#compare-random-forest-and-support-vector-machine-for-supervised-classification"><span class="header-section-number">2.1.2</span> Compare Random Forest and Support Vector Machine for Supervised Classification</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#part-1b.-training-data-with-raven-selection-tables"><span class="header-section-number">2.2</span> Part 1B. Training Data with Raven Selection Tables</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#prepare-training-data-from-labeled-annotations"><span class="header-section-number">2.2.1</span> Prepare training data from labeled annotations</a></li>
+<li><a class="nav-link" href="#prepare-noise-training-data-from-files-without-target-signal"><span class="header-section-number">2.2.2</span> Prepare noise training data from files without target signal</a></li>
+<li><a class="nav-link" href="#now-read-in-clips-based-on-raven-selection-tables-and-calculate-mfccs"><span class="header-section-number">2.2.3</span> Now read in clips based on Raven Selection tables and calculate MFCCs</a></li>
+<li><a class="nav-link" href="#compare-random-forest-and-support-vector-machine-for-supervised-classification-1"><span class="header-section-number">2.2.4</span> Compare Random Forest and Support Vector Machine for Supervised Classification</a></li>
+</ul>
+</li>
+</ul>
 
-          </div>
-        </div>
-      </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="part-2.-run-the-detectorclassifier.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings</strong>" was written by Dena J. Clink. It was last built on 2022-10-15.</p>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-"sharing": {
-"github": false,
-"facebook": true,
-"twitter": true,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": "https://github.com/rstudio/bookdown-demo/edit/master/01-Prepare-training-data.Rmd",
-"text": "Edit"
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["gibbonR_tutorial.pdf", "gibbonR_tutorial.epub"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "subsection"
-}
-});
-});
-</script>
 
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer>
 </body>
-
 </html>
