@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 ```
 
 # Getting started
-## You can install the development version from [GitHub](https://github.com/DenaJGibbon) with:
+You can install the development version from [GitHub](https://github.com/DenaJGibbon) with:
 ```{r, echo=T,warning=FALSE, results='hide'}
 # install.packages("devtools")
 # devtools::install_github("DenaJGibbon/gibbonR")
@@ -31,5 +31,7 @@ knitr::opts_chunk$set(
 library(gibbonR)
 ```
 
-
-
+* 'gibbonR' has functions to 
+    + detect sound events using band-limited energy summation 
+    + detect and classify sound events using random forest or support vector machines
+    + visualize sound events using UMAP plots
