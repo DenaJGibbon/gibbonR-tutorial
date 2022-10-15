@@ -31,7 +31,7 @@ You can install the development version from [GitHub](https://github.com/DenaJGi
 library(gibbonR)
 ```
 
-* 'gibbonR' has functions to 
-    + detect sound events using band-limited energy summation 
-    + detect and classify sound events using random forest or support vector machines
-    + visualize sound events using UMAP plots
+'gibbonR' has functions to 
+  + detect sound events using band-limited energy summation 
+  + detect and classify sound events using random forest or support vector machine algorithms
+  + visualize sound events using UMAP plots
