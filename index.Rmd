@@ -33,6 +33,6 @@ library(gibbonR)
 
 # Package summary
 'gibbonR' has functions to:     
-  + detect sound events using band-limited energy summation   
-  + detect and classify sound events using random forest or support vector machine algorithms   
-  + visualize sound events using UMAP plots   
+  + detect sound events using band-limited energy summation (DetectBLED)
+  + detect and classify sound events using random forest or support vector machine algorithms (gibbonR)   
+  + visualize sound events using UMAP plots with affinity propagation lcustering (gibbonID)
