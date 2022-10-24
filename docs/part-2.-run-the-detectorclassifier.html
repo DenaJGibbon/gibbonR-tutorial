@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>3 Part 2. Run the detector/classifier | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings</title>
-  <meta name="description" content="3 Part 2. Run the detector/classifier | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings" />
+  <title>4 Part 2. Run the detector/classifier | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings</title>
+  <meta name="description" content="4 Part 2. Run the detector/classifier | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="3 Part 2. Run the detector/classifier | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings" />
+  <meta property="og:title" content="4 Part 2. Run the detector/classifier | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="DenaJGibbon/gibbonR-tutorial" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="3 Part 2. Run the detector/classifier | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings" />
+  <meta name="twitter:title" content="4 Part 2. Run the detector/classifier | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings" />
   
   
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Dena J. Clink" />
 
 
-<meta name="date" content="2022-10-15" />
+<meta name="date" content="2022-10-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -136,39 +136,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./"> gibbonR </a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Getting started</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Package installation</a></li>
+<li class="chapter" data-level="2" data-path="package-summary.html"><a href="package-summary.html"><i class="fa fa-check"></i><b>2</b> Package summary</a></li>
+<li class="chapter" data-level="3" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html"><i class="fa fa-check"></i><b>3</b> Part 1. Prepare Training Data</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#you-can-install-the-development-version-from-github-with"><i class="fa fa-check"></i><b>1.1</b> You can install the development version from <span>GitHub</span> with:</a></li>
+<li class="chapter" data-level="3.1" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#part-1a.-training-data-with-labeled-.wav-clips"><i class="fa fa-check"></i><b>3.1</b> Part 1A. Training Data with Labeled .wav clips</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#read-in-clips-and-calculate-mfccs"><i class="fa fa-check"></i><b>3.1.1</b> Read in clips and calculate MFCCs</a></li>
+<li class="chapter" data-level="3.1.2" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#compare-random-forest-and-support-vector-machine-for-supervised-classification"><i class="fa fa-check"></i><b>3.1.2</b> Compare Random Forest and Support Vector Machine for Supervised Classification</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html"><i class="fa fa-check"></i><b>2</b> Part 1. Prepare Training Data</a>
+<li class="chapter" data-level="3.2" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#part-1b.-training-data-with-raven-selection-tables"><i class="fa fa-check"></i><b>3.2</b> Part 1B. Training Data with Raven Selection Tables</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#part-1a.-training-data-with-labeled-.wav-clips"><i class="fa fa-check"></i><b>2.1</b> Part 1A. Training Data with Labeled .wav clips</a>
-<ul>
-<li class="chapter" data-level="2.1.1" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#read-in-clips-and-calculate-mfccs"><i class="fa fa-check"></i><b>2.1.1</b> Read in clips and calculate MFCCs</a></li>
-<li class="chapter" data-level="2.1.2" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#compare-random-forest-and-support-vector-machine-for-supervised-classification"><i class="fa fa-check"></i><b>2.1.2</b> Compare Random Forest and Support Vector Machine for Supervised Classification</a></li>
-</ul></li>
-<li class="chapter" data-level="2.2" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#part-1b.-training-data-with-raven-selection-tables"><i class="fa fa-check"></i><b>2.2</b> Part 1B. Training Data with Raven Selection Tables</a>
-<ul>
-<li class="chapter" data-level="2.2.1" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#prepare-training-data-from-labeled-annotations"><i class="fa fa-check"></i><b>2.2.1</b> Prepare training data from labeled annotations</a></li>
-<li class="chapter" data-level="2.2.2" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#prepare-noise-training-data-from-files-without-target-signal"><i class="fa fa-check"></i><b>2.2.2</b> Prepare noise training data from files without target signal</a></li>
-<li class="chapter" data-level="2.2.3" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#now-read-in-clips-based-on-raven-selection-tables-and-calculate-mfccs"><i class="fa fa-check"></i><b>2.2.3</b> Now read in clips based on Raven Selection tables and calculate MFCCs</a></li>
-<li class="chapter" data-level="2.2.4" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#compare-random-forest-and-support-vector-machine-for-supervised-classification-1"><i class="fa fa-check"></i><b>2.2.4</b> Compare Random Forest and Support Vector Machine for Supervised Classification</a></li>
+<li class="chapter" data-level="3.2.1" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#prepare-training-data-from-labeled-annotations"><i class="fa fa-check"></i><b>3.2.1</b> Prepare training data from labeled annotations</a></li>
+<li class="chapter" data-level="3.2.2" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#prepare-noise-training-data-from-files-without-target-signal"><i class="fa fa-check"></i><b>3.2.2</b> Prepare noise training data from files without target signal</a></li>
+<li class="chapter" data-level="3.2.3" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#now-read-in-clips-based-on-raven-selection-tables-and-calculate-mfccs"><i class="fa fa-check"></i><b>3.2.3</b> Now read in clips based on Raven Selection tables and calculate MFCCs</a></li>
+<li class="chapter" data-level="3.2.4" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#compare-random-forest-and-support-vector-machine-for-supervised-classification-1"><i class="fa fa-check"></i><b>3.2.4</b> Compare Random Forest and Support Vector Machine for Supervised Classification</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="part-2.-run-the-detectorclassifier.html"><a href="part-2.-run-the-detectorclassifier.html"><i class="fa fa-check"></i><b>3</b> Part 2. Run the detector/classifier</a>
+<li class="chapter" data-level="4" data-path="part-2.-run-the-detectorclassifier.html"><a href="part-2.-run-the-detectorclassifier.html"><i class="fa fa-check"></i><b>4</b> Part 2. Run the detector/classifier</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="part-2.-run-the-detectorclassifier.html"><a href="part-2.-run-the-detectorclassifier.html#part-2a.-feature-extraction"><i class="fa fa-check"></i><b>3.1</b> Part 2a. Feature extraction</a></li>
-<li class="chapter" data-level="3.2" data-path="part-2.-run-the-detectorclassifier.html"><a href="part-2.-run-the-detectorclassifier.html#part-2b.-run-detectclassify"><i class="fa fa-check"></i><b>3.2</b> Part 2b. Run DetectClassify</a></li>
+<li class="chapter" data-level="4.1" data-path="part-2.-run-the-detectorclassifier.html"><a href="part-2.-run-the-detectorclassifier.html#part-2a.-feature-extraction"><i class="fa fa-check"></i><b>4.1</b> Part 2a. Feature extraction</a></li>
+<li class="chapter" data-level="4.2" data-path="part-2.-run-the-detectorclassifier.html"><a href="part-2.-run-the-detectorclassifier.html#part-2b.-run-the-detectorclassifier-using-the-gibbonr-function."><i class="fa fa-check"></i><b>4.2</b> Part 2b. Run the detector/classifier using the ‘gibbonR’ function.</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html"><i class="fa fa-check"></i><b>4</b> Part 3. Calculate performance metrics</a>
+<li class="chapter" data-level="5" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html"><i class="fa fa-check"></i><b>5</b> Part 3. Calculate performance metrics</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html#part-3a.-prepare-data-for-performance-metrics"><i class="fa fa-check"></i><b>4.1</b> Part 3a. Prepare data for performance metrics</a></li>
-<li class="chapter" data-level="4.2" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html#part-3b.-identify-true-and-false-positives"><i class="fa fa-check"></i><b>4.2</b> Part 3b. Identify true and false positives</a></li>
-<li class="chapter" data-level="4.3" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html#part-3c.-calculate-and-plot-performance-metrics-using-rocr"><i class="fa fa-check"></i><b>4.3</b> Part 3c. Calculate and plot performance metrics using ‘ROCR’</a></li>
+<li class="chapter" data-level="5.1" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html#part-3a.-prepare-data-for-performance-metrics"><i class="fa fa-check"></i><b>5.1</b> Part 3a. Prepare data for performance metrics</a></li>
+<li class="chapter" data-level="5.2" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html#part-3b.-identify-true-and-false-positives"><i class="fa fa-check"></i><b>5.2</b> Part 3b. Identify true and false positives</a></li>
+<li class="chapter" data-level="5.3" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html#part-3c.-calculate-and-plot-performance-metrics-using-rocr"><i class="fa fa-check"></i><b>5.3</b> Part 3c. Calculate and plot performance metrics using ‘ROCR’</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="part-4.-data-visualization.html"><a href="part-4.-data-visualization.html"><i class="fa fa-check"></i><b>5</b> Part 4. Data visualization</a>
+<li class="chapter" data-level="6" data-path="part-4.-data-visualization.html"><a href="part-4.-data-visualization.html"><i class="fa fa-check"></i><b>6</b> Part 4. Data visualization</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="part-4.-data-visualization.html"><a href="part-4.-data-visualization.html#part-4a.-create-a-umap-plot-colored-by-class"><i class="fa fa-check"></i><b>5.1</b> Part 4a. Create a UMAP plot colored by class</a></li>
+<li class="chapter" data-level="6.1" data-path="part-4.-data-visualization.html"><a href="part-4.-data-visualization.html#part-4a.-create-a-umap-plot-colored-by-class"><i class="fa fa-check"></i><b>6.1</b> Part 4a. Create a UMAP plot colored by class</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -190,70 +188,122 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="part-2.-run-the-detectorclassifier" class="section level1 hasAnchor" number="3">
-<h1><span class="header-section-number">3</span> Part 2. Run the detector/classifier<a href="part-2.-run-the-detectorclassifier.html#part-2.-run-the-detectorclassifier" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="part-2a.-feature-extraction" class="section level2 hasAnchor" number="3.1">
-<h2><span class="header-section-number">3.1</span> Part 2a. Feature extraction<a href="part-2.-run-the-detectorclassifier.html#part-2a.-feature-extraction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="part-2.-run-the-detectorclassifier" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">4</span> Part 2. Run the detector/classifier<a href="part-2.-run-the-detectorclassifier.html#part-2.-run-the-detectorclassifier" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="part-2a.-feature-extraction" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Part 2a. Feature extraction<a href="part-2.-run-the-detectorclassifier.html#part-2a.-feature-extraction" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="part-2.-run-the-detectorclassifier.html#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify the folder where the training data will be saved</span></span>
 <span id="cb8-2"><a href="part-2.-run-the-detectorclassifier.html#cb8-2" aria-hidden="true" tabindex="-1"></a>TrainingDataFolderLocation <span class="ot">&lt;-</span> <span class="st">&quot;/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/TrainingDataFromRavenSelectionTables/&quot;</span></span>
 <span id="cb8-3"><a href="part-2.-run-the-detectorclassifier.html#cb8-3" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb8-4"><a href="part-2.-run-the-detectorclassifier.html#cb8-4" aria-hidden="true" tabindex="-1"></a>TrainingDataMFCC <span class="ot">&lt;-</span> <span class="fu">MFCCFunction</span>(<span class="at">input.dir=</span> TrainingDataFolderLocation, <span class="at">min.freq =</span> <span class="dv">400</span>, <span class="at">max.freq =</span> <span class="dv">1600</span>,<span class="at">win.avg=</span><span class="st">&quot;TRUE&quot;</span>)</span>
-<span id="cb8-5"><a href="part-2.-run-the-detectorclassifier.html#cb8-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb8-6"><a href="part-2.-run-the-detectorclassifier.html#cb8-6" aria-hidden="true" tabindex="-1"></a>  TrainingDataMFCC<span class="sc">$</span>class <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(TrainingDataMFCC<span class="sc">$</span>class)</span></code></pre></div>
+<span id="cb8-4"><a href="part-2.-run-the-detectorclassifier.html#cb8-4" aria-hidden="true" tabindex="-1"></a>TrainingDataMFCC <span class="ot">&lt;-</span> <span class="fu">MFCCFunction</span>(<span class="at">input.dir=</span> TrainingDataFolderLocation, <span class="at">min.freq =</span> <span class="dv">400</span>, <span class="at">max.freq =</span> <span class="dv">1600</span>,<span class="at">win.avg=</span><span class="st">&quot;standard&quot;</span>)</span>
+<span id="cb8-5"><a href="part-2.-run-the-detectorclassifier.html#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 1 out of 53&quot;</span></span>
+<span id="cb8-6"><a href="part-2.-run-the-detectorclassifier.html#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 2 out of 53&quot;</span></span>
+<span id="cb8-7"><a href="part-2.-run-the-detectorclassifier.html#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 3 out of 53&quot;</span></span>
+<span id="cb8-8"><a href="part-2.-run-the-detectorclassifier.html#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 4 out of 53&quot;</span></span>
+<span id="cb8-9"><a href="part-2.-run-the-detectorclassifier.html#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 5 out of 53&quot;</span></span>
+<span id="cb8-10"><a href="part-2.-run-the-detectorclassifier.html#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 6 out of 53&quot;</span></span>
+<span id="cb8-11"><a href="part-2.-run-the-detectorclassifier.html#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 7 out of 53&quot;</span></span>
+<span id="cb8-12"><a href="part-2.-run-the-detectorclassifier.html#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 8 out of 53&quot;</span></span>
+<span id="cb8-13"><a href="part-2.-run-the-detectorclassifier.html#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 9 out of 53&quot;</span></span>
+<span id="cb8-14"><a href="part-2.-run-the-detectorclassifier.html#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 10 out of 53&quot;</span></span>
+<span id="cb8-15"><a href="part-2.-run-the-detectorclassifier.html#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 11 out of 53&quot;</span></span>
+<span id="cb8-16"><a href="part-2.-run-the-detectorclassifier.html#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 12 out of 53&quot;</span></span>
+<span id="cb8-17"><a href="part-2.-run-the-detectorclassifier.html#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 13 out of 53&quot;</span></span>
+<span id="cb8-18"><a href="part-2.-run-the-detectorclassifier.html#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 14 out of 53&quot;</span></span>
+<span id="cb8-19"><a href="part-2.-run-the-detectorclassifier.html#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 15 out of 53&quot;</span></span>
+<span id="cb8-20"><a href="part-2.-run-the-detectorclassifier.html#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 16 out of 53&quot;</span></span>
+<span id="cb8-21"><a href="part-2.-run-the-detectorclassifier.html#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 17 out of 53&quot;</span></span>
+<span id="cb8-22"><a href="part-2.-run-the-detectorclassifier.html#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 18 out of 53&quot;</span></span>
+<span id="cb8-23"><a href="part-2.-run-the-detectorclassifier.html#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 19 out of 53&quot;</span></span>
+<span id="cb8-24"><a href="part-2.-run-the-detectorclassifier.html#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 20 out of 53&quot;</span></span>
+<span id="cb8-25"><a href="part-2.-run-the-detectorclassifier.html#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 21 out of 53&quot;</span></span>
+<span id="cb8-26"><a href="part-2.-run-the-detectorclassifier.html#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 22 out of 53&quot;</span></span>
+<span id="cb8-27"><a href="part-2.-run-the-detectorclassifier.html#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 23 out of 53&quot;</span></span>
+<span id="cb8-28"><a href="part-2.-run-the-detectorclassifier.html#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 24 out of 53&quot;</span></span>
+<span id="cb8-29"><a href="part-2.-run-the-detectorclassifier.html#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 25 out of 53&quot;</span></span>
+<span id="cb8-30"><a href="part-2.-run-the-detectorclassifier.html#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 26 out of 53&quot;</span></span>
+<span id="cb8-31"><a href="part-2.-run-the-detectorclassifier.html#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 27 out of 53&quot;</span></span>
+<span id="cb8-32"><a href="part-2.-run-the-detectorclassifier.html#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 28 out of 53&quot;</span></span>
+<span id="cb8-33"><a href="part-2.-run-the-detectorclassifier.html#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 29 out of 53&quot;</span></span>
+<span id="cb8-34"><a href="part-2.-run-the-detectorclassifier.html#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 30 out of 53&quot;</span></span>
+<span id="cb8-35"><a href="part-2.-run-the-detectorclassifier.html#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 31 out of 53&quot;</span></span>
+<span id="cb8-36"><a href="part-2.-run-the-detectorclassifier.html#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 32 out of 53&quot;</span></span>
+<span id="cb8-37"><a href="part-2.-run-the-detectorclassifier.html#cb8-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 33 out of 53&quot;</span></span>
+<span id="cb8-38"><a href="part-2.-run-the-detectorclassifier.html#cb8-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 34 out of 53&quot;</span></span>
+<span id="cb8-39"><a href="part-2.-run-the-detectorclassifier.html#cb8-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 35 out of 53&quot;</span></span>
+<span id="cb8-40"><a href="part-2.-run-the-detectorclassifier.html#cb8-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 36 out of 53&quot;</span></span>
+<span id="cb8-41"><a href="part-2.-run-the-detectorclassifier.html#cb8-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 37 out of 53&quot;</span></span>
+<span id="cb8-42"><a href="part-2.-run-the-detectorclassifier.html#cb8-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 38 out of 53&quot;</span></span>
+<span id="cb8-43"><a href="part-2.-run-the-detectorclassifier.html#cb8-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 39 out of 53&quot;</span></span>
+<span id="cb8-44"><a href="part-2.-run-the-detectorclassifier.html#cb8-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 40 out of 53&quot;</span></span>
+<span id="cb8-45"><a href="part-2.-run-the-detectorclassifier.html#cb8-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 41 out of 53&quot;</span></span>
+<span id="cb8-46"><a href="part-2.-run-the-detectorclassifier.html#cb8-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 42 out of 53&quot;</span></span>
+<span id="cb8-47"><a href="part-2.-run-the-detectorclassifier.html#cb8-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 43 out of 53&quot;</span></span>
+<span id="cb8-48"><a href="part-2.-run-the-detectorclassifier.html#cb8-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 44 out of 53&quot;</span></span>
+<span id="cb8-49"><a href="part-2.-run-the-detectorclassifier.html#cb8-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 45 out of 53&quot;</span></span>
+<span id="cb8-50"><a href="part-2.-run-the-detectorclassifier.html#cb8-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 46 out of 53&quot;</span></span>
+<span id="cb8-51"><a href="part-2.-run-the-detectorclassifier.html#cb8-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 47 out of 53&quot;</span></span>
+<span id="cb8-52"><a href="part-2.-run-the-detectorclassifier.html#cb8-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 48 out of 53&quot;</span></span>
+<span id="cb8-53"><a href="part-2.-run-the-detectorclassifier.html#cb8-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 49 out of 53&quot;</span></span>
+<span id="cb8-54"><a href="part-2.-run-the-detectorclassifier.html#cb8-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 50 out of 53&quot;</span></span>
+<span id="cb8-55"><a href="part-2.-run-the-detectorclassifier.html#cb8-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 51 out of 53&quot;</span></span>
+<span id="cb8-56"><a href="part-2.-run-the-detectorclassifier.html#cb8-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 52 out of 53&quot;</span></span>
+<span id="cb8-57"><a href="part-2.-run-the-detectorclassifier.html#cb8-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;processing sound event 53 out of 53&quot;</span></span>
+<span id="cb8-58"><a href="part-2.-run-the-detectorclassifier.html#cb8-58" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-59"><a href="part-2.-run-the-detectorclassifier.html#cb8-59" aria-hidden="true" tabindex="-1"></a>TrainingDataMFCC<span class="sc">$</span>class <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(TrainingDataMFCC<span class="sc">$</span>class)</span></code></pre></div>
 </div>
-<div id="part-2b.-run-detectclassify" class="section level2 hasAnchor" number="3.2">
-<h2><span class="header-section-number">3.2</span> Part 2b. Run DetectClassify<a href="part-2.-run-the-detectorclassifier.html#part-2b.-run-detectclassify" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="part-2.-run-the-detectorclassifier.html#cb9-1" aria-hidden="true" tabindex="-1"></a></span>
+<div id="part-2b.-run-the-detectorclassifier-using-the-gibbonr-function." class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Part 2b. Run the detector/classifier using the ‘gibbonR’ function.<a href="part-2.-run-the-detectorclassifier.html#part-2b.-run-the-detectorclassifier-using-the-gibbonr-function." class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="part-2.-run-the-detectorclassifier.html#cb9-1" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb9-2"><a href="part-2.-run-the-detectorclassifier.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  TestFileDirectory <span class="ot">&lt;-</span> <span class="st">&#39;/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/GibbonTestFiles&#39;</span></span>
 <span id="cb9-3"><a href="part-2.-run-the-detectorclassifier.html#cb9-3" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb9-4"><a href="part-2.-run-the-detectorclassifier.html#cb9-4" aria-hidden="true" tabindex="-1"></a>  OutputDirectory <span class="ot">&lt;-</span>  <span class="st">&quot;/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/DetectAndClassifyOutput&quot;</span></span>
 <span id="cb9-5"><a href="part-2.-run-the-detectorclassifier.html#cb9-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb9-6"><a href="part-2.-run-the-detectorclassifier.html#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">DetectAndClassify</span>(<span class="at">input=</span>TestFileDirectory,</span>
-<span id="cb9-7"><a href="part-2.-run-the-detectorclassifier.html#cb9-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">input.type=</span><span class="st">&#39;directory&#39;</span>,</span>
-<span id="cb9-8"><a href="part-2.-run-the-detectorclassifier.html#cb9-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">feature.df=</span>TrainingDataMFCC,</span>
-<span id="cb9-9"><a href="part-2.-run-the-detectorclassifier.html#cb9-9" aria-hidden="true" tabindex="-1"></a>                    <span class="at">model.type.list=</span><span class="fu">c</span>(<span class="st">&#39;SVM&#39;</span>,<span class="st">&#39;RF&#39;</span>),</span>
-<span id="cb9-10"><a href="part-2.-run-the-detectorclassifier.html#cb9-10" aria-hidden="true" tabindex="-1"></a>                    <span class="at">tune =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb9-11"><a href="part-2.-run-the-detectorclassifier.html#cb9-11" aria-hidden="true" tabindex="-1"></a>                    <span class="at">short.wav.duration=</span><span class="dv">300</span>,</span>
-<span id="cb9-12"><a href="part-2.-run-the-detectorclassifier.html#cb9-12" aria-hidden="true" tabindex="-1"></a>                    <span class="at">target.signal =</span> <span class="fu">c</span>(<span class="st">&quot;female.gibbon&quot;</span>),</span>
-<span id="cb9-13"><a href="part-2.-run-the-detectorclassifier.html#cb9-13" aria-hidden="true" tabindex="-1"></a>                    <span class="at">min.freq =</span> <span class="dv">400</span>, <span class="at">max.freq =</span> <span class="dv">1600</span>,</span>
-<span id="cb9-14"><a href="part-2.-run-the-detectorclassifier.html#cb9-14" aria-hidden="true" tabindex="-1"></a>                    <span class="at">noise.quantile.val=</span><span class="fl">0.15</span>,</span>
-<span id="cb9-15"><a href="part-2.-run-the-detectorclassifier.html#cb9-15" aria-hidden="true" tabindex="-1"></a>                    <span class="at">time.window.number =</span><span class="dv">3</span>,</span>
-<span id="cb9-16"><a href="part-2.-run-the-detectorclassifier.html#cb9-16" aria-hidden="true" tabindex="-1"></a>                    <span class="at">n.windows =</span> <span class="dv">9</span>, <span class="at">num.cep =</span> <span class="dv">12</span>,</span>
-<span id="cb9-17"><a href="part-2.-run-the-detectorclassifier.html#cb9-17" aria-hidden="true" tabindex="-1"></a>                    <span class="at">spectrogram.window =</span><span class="dv">160</span>,</span>
-<span id="cb9-18"><a href="part-2.-run-the-detectorclassifier.html#cb9-18" aria-hidden="true" tabindex="-1"></a>                    <span class="at">pattern.split =</span> <span class="st">&quot;.wav&quot;</span>,</span>
-<span id="cb9-19"><a href="part-2.-run-the-detectorclassifier.html#cb9-19" aria-hidden="true" tabindex="-1"></a>                    <span class="at">min.signal.dur =</span> <span class="dv">3</span>,</span>
-<span id="cb9-20"><a href="part-2.-run-the-detectorclassifier.html#cb9-20" aria-hidden="true" tabindex="-1"></a>                    <span class="at">max.sound.event.dur =</span> <span class="dv">25</span>,</span>
-<span id="cb9-21"><a href="part-2.-run-the-detectorclassifier.html#cb9-21" aria-hidden="true" tabindex="-1"></a>                    <span class="at">maximum.separation =</span><span class="dv">1</span>,</span>
-<span id="cb9-22"><a href="part-2.-run-the-detectorclassifier.html#cb9-22" aria-hidden="true" tabindex="-1"></a>                    <span class="at">probability.thresh.svm =</span> <span class="fl">0.15</span>,</span>
-<span id="cb9-23"><a href="part-2.-run-the-detectorclassifier.html#cb9-23" aria-hidden="true" tabindex="-1"></a>                    <span class="at">probability.thresh.rf =</span> <span class="fl">0.15</span>,</span>
-<span id="cb9-24"><a href="part-2.-run-the-detectorclassifier.html#cb9-24" aria-hidden="true" tabindex="-1"></a>                    <span class="at">wav.output =</span> <span class="st">&quot;TRUE&quot;</span>,</span>
-<span id="cb9-25"><a href="part-2.-run-the-detectorclassifier.html#cb9-25" aria-hidden="true" tabindex="-1"></a>                    <span class="at">output.dir =</span>OutputDirectory,</span>
-<span id="cb9-26"><a href="part-2.-run-the-detectorclassifier.html#cb9-26" aria-hidden="true" tabindex="-1"></a>                    <span class="at">swift.time=</span><span class="cn">TRUE</span>,<span class="at">time.start=</span><span class="dv">5</span>,<span class="at">time.stop=</span><span class="dv">10</span>,</span>
-<span id="cb9-27"><a href="part-2.-run-the-detectorclassifier.html#cb9-27" aria-hidden="true" tabindex="-1"></a>                    <span class="at">write.csv.output=</span><span class="cn">FALSE</span>,<span class="at">verbose=</span><span class="cn">TRUE</span>,</span>
-<span id="cb9-28"><a href="part-2.-run-the-detectorclassifier.html#cb9-28" aria-hidden="true" tabindex="-1"></a>                    <span class="at">random.sample=</span><span class="st">&#39;NA&#39;</span>)</span>
-<span id="cb9-29"><a href="part-2.-run-the-detectorclassifier.html#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Machine learning in progress...&quot;</span></span>
-<span id="cb9-30"><a href="part-2.-run-the-detectorclassifier.html#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;SVM in progress...&quot;</span></span>
-<span id="cb9-31"><a href="part-2.-run-the-detectorclassifier.html#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;SVM accuracy 98.1132075471698&quot;</span></span>
-<span id="cb9-32"><a href="part-2.-run-the-detectorclassifier.html#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Time difference of 1.597844 secs</span></span>
-<span id="cb9-33"><a href="part-2.-run-the-detectorclassifier.html#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;RF in progress...&quot;</span></span>
-<span id="cb9-34"><a href="part-2.-run-the-detectorclassifier.html#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb9-35"><a href="part-2.-run-the-detectorclassifier.html#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Call:</span></span>
-<span id="cb9-36"><a href="part-2.-run-the-detectorclassifier.html#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  randomForest(x = feature.df[, 2:ncol(feature.df)], y = feature.df$class) </span></span>
-<span id="cb9-37"><a href="part-2.-run-the-detectorclassifier.html#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                Type of random forest: classification</span></span>
-<span id="cb9-38"><a href="part-2.-run-the-detectorclassifier.html#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                      Number of trees: 500</span></span>
-<span id="cb9-39"><a href="part-2.-run-the-detectorclassifier.html#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; No. of variables tried at each split: 13</span></span>
-<span id="cb9-40"><a href="part-2.-run-the-detectorclassifier.html#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb9-41"><a href="part-2.-run-the-detectorclassifier.html#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         OOB estimate of  error rate: 5.66%</span></span>
-<span id="cb9-42"><a href="part-2.-run-the-detectorclassifier.html#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Confusion matrix:</span></span>
-<span id="cb9-43"><a href="part-2.-run-the-detectorclassifier.html#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;               female.gibbon noise class.error</span></span>
-<span id="cb9-44"><a href="part-2.-run-the-detectorclassifier.html#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; female.gibbon            25     1  0.03846154</span></span>
-<span id="cb9-45"><a href="part-2.-run-the-detectorclassifier.html#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; noise                     2    25  0.07407407</span></span>
-<span id="cb9-46"><a href="part-2.-run-the-detectorclassifier.html#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.06244707 secs</span></span>
-<span id="cb9-47"><a href="part-2.-run-the-detectorclassifier.html#cb9-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Classifying for target signal female.gibbon&quot;</span></span>
-<span id="cb9-48"><a href="part-2.-run-the-detectorclassifier.html#cb9-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Computing spectrogram for file S11_20180217_080003 1 out of 1&quot;</span></span>
-<span id="cb9-49"><a href="part-2.-run-the-detectorclassifier.html#cb9-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Running detector over sound files&quot;</span></span>
-<span id="cb9-50"><a href="part-2.-run-the-detectorclassifier.html#cb9-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Creating datasheet&quot;</span></span>
-<span id="cb9-51"><a href="part-2.-run-the-detectorclassifier.html#cb9-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;System processed 7201 seconds in 15 seconds this translates to 487.8 hours processed in 1 hour&quot;</span></span></code></pre></div>
+<span id="cb9-6"><a href="part-2.-run-the-detectorclassifier.html#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gibbonR</span>(<span class="at">input=</span>TestFileDirectory,</span>
+<span id="cb9-7"><a href="part-2.-run-the-detectorclassifier.html#cb9-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">feature.df=</span>TrainingDataMFCC,</span>
+<span id="cb9-8"><a href="part-2.-run-the-detectorclassifier.html#cb9-8" aria-hidden="true" tabindex="-1"></a>                    <span class="at">model.type.list=</span><span class="fu">c</span>(<span class="st">&#39;SVM&#39;</span>,<span class="st">&#39;RF&#39;</span>),</span>
+<span id="cb9-9"><a href="part-2.-run-the-detectorclassifier.html#cb9-9" aria-hidden="true" tabindex="-1"></a>                    <span class="at">tune =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb9-10"><a href="part-2.-run-the-detectorclassifier.html#cb9-10" aria-hidden="true" tabindex="-1"></a>                    <span class="at">short.wav.duration=</span><span class="dv">300</span>,</span>
+<span id="cb9-11"><a href="part-2.-run-the-detectorclassifier.html#cb9-11" aria-hidden="true" tabindex="-1"></a>                    <span class="at">target.signal =</span> <span class="fu">c</span>(<span class="st">&quot;female.gibbon&quot;</span>),</span>
+<span id="cb9-12"><a href="part-2.-run-the-detectorclassifier.html#cb9-12" aria-hidden="true" tabindex="-1"></a>                    <span class="at">min.freq =</span> <span class="dv">400</span>, <span class="at">max.freq =</span> <span class="dv">1600</span>,</span>
+<span id="cb9-13"><a href="part-2.-run-the-detectorclassifier.html#cb9-13" aria-hidden="true" tabindex="-1"></a>                    <span class="at">noise.quantile.val=</span><span class="fl">0.15</span>,</span>
+<span id="cb9-14"><a href="part-2.-run-the-detectorclassifier.html#cb9-14" aria-hidden="true" tabindex="-1"></a>                    <span class="at">minimum.separation =</span><span class="dv">3</span>,</span>
+<span id="cb9-15"><a href="part-2.-run-the-detectorclassifier.html#cb9-15" aria-hidden="true" tabindex="-1"></a>                    <span class="at">n.windows =</span> <span class="dv">9</span>, <span class="at">num.cep =</span> <span class="dv">12</span>,</span>
+<span id="cb9-16"><a href="part-2.-run-the-detectorclassifier.html#cb9-16" aria-hidden="true" tabindex="-1"></a>                    <span class="at">spectrogram.window =</span><span class="dv">160</span>,</span>
+<span id="cb9-17"><a href="part-2.-run-the-detectorclassifier.html#cb9-17" aria-hidden="true" tabindex="-1"></a>                    <span class="at">pattern.split =</span> <span class="st">&quot;.wav&quot;</span>,</span>
+<span id="cb9-18"><a href="part-2.-run-the-detectorclassifier.html#cb9-18" aria-hidden="true" tabindex="-1"></a>                    <span class="at">min.signal.dur =</span> <span class="dv">3</span>,</span>
+<span id="cb9-19"><a href="part-2.-run-the-detectorclassifier.html#cb9-19" aria-hidden="true" tabindex="-1"></a>                    <span class="at">max.sound.event.dur =</span> <span class="dv">25</span>,</span>
+<span id="cb9-20"><a href="part-2.-run-the-detectorclassifier.html#cb9-20" aria-hidden="true" tabindex="-1"></a>                    <span class="at">maximum.separation =</span><span class="dv">1</span>,</span>
+<span id="cb9-21"><a href="part-2.-run-the-detectorclassifier.html#cb9-21" aria-hidden="true" tabindex="-1"></a>                    <span class="at">probability.thresh.svm =</span> <span class="fl">0.15</span>,</span>
+<span id="cb9-22"><a href="part-2.-run-the-detectorclassifier.html#cb9-22" aria-hidden="true" tabindex="-1"></a>                    <span class="at">probability.thresh.rf =</span> <span class="fl">0.15</span>,</span>
+<span id="cb9-23"><a href="part-2.-run-the-detectorclassifier.html#cb9-23" aria-hidden="true" tabindex="-1"></a>                    <span class="at">wav.output =</span> <span class="st">&quot;TRUE&quot;</span>,</span>
+<span id="cb9-24"><a href="part-2.-run-the-detectorclassifier.html#cb9-24" aria-hidden="true" tabindex="-1"></a>                    <span class="at">output.dir =</span>OutputDirectory,</span>
+<span id="cb9-25"><a href="part-2.-run-the-detectorclassifier.html#cb9-25" aria-hidden="true" tabindex="-1"></a>                    <span class="at">swift.time=</span><span class="cn">TRUE</span>,<span class="at">time.start=</span><span class="dv">5</span>,<span class="at">time.stop=</span><span class="dv">10</span>,</span>
+<span id="cb9-26"><a href="part-2.-run-the-detectorclassifier.html#cb9-26" aria-hidden="true" tabindex="-1"></a>                    <span class="at">write.table.output=</span><span class="cn">FALSE</span>,<span class="at">verbose=</span><span class="cn">TRUE</span>,</span>
+<span id="cb9-27"><a href="part-2.-run-the-detectorclassifier.html#cb9-27" aria-hidden="true" tabindex="-1"></a>                    <span class="at">random.sample=</span><span class="st">&#39;NA&#39;</span>)</span>
+<span id="cb9-28"><a href="part-2.-run-the-detectorclassifier.html#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Machine learning in progress...&quot;</span></span>
+<span id="cb9-29"><a href="part-2.-run-the-detectorclassifier.html#cb9-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;SVM in progress...&quot;</span></span>
+<span id="cb9-30"><a href="part-2.-run-the-detectorclassifier.html#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;SVM accuracy 98.1132075471698&quot;</span></span>
+<span id="cb9-31"><a href="part-2.-run-the-detectorclassifier.html#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Time difference of 1.558072 secs</span></span>
+<span id="cb9-32"><a href="part-2.-run-the-detectorclassifier.html#cb9-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;RF in progress...&quot;</span></span>
+<span id="cb9-33"><a href="part-2.-run-the-detectorclassifier.html#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb9-34"><a href="part-2.-run-the-detectorclassifier.html#cb9-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Call:</span></span>
+<span id="cb9-35"><a href="part-2.-run-the-detectorclassifier.html#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  randomForest(x = feature.df[, 2:ncol(feature.df)], y = feature.df$class) </span></span>
+<span id="cb9-36"><a href="part-2.-run-the-detectorclassifier.html#cb9-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                Type of random forest: classification</span></span>
+<span id="cb9-37"><a href="part-2.-run-the-detectorclassifier.html#cb9-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                      Number of trees: 500</span></span>
+<span id="cb9-38"><a href="part-2.-run-the-detectorclassifier.html#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; No. of variables tried at each split: 13</span></span>
+<span id="cb9-39"><a href="part-2.-run-the-detectorclassifier.html#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb9-40"><a href="part-2.-run-the-detectorclassifier.html#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         OOB estimate of  error rate: 3.77%</span></span>
+<span id="cb9-41"><a href="part-2.-run-the-detectorclassifier.html#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Confusion matrix:</span></span>
+<span id="cb9-42"><a href="part-2.-run-the-detectorclassifier.html#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;               female.gibbon noise class.error</span></span>
+<span id="cb9-43"><a href="part-2.-run-the-detectorclassifier.html#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; female.gibbon            25     1  0.03846154</span></span>
+<span id="cb9-44"><a href="part-2.-run-the-detectorclassifier.html#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; noise                     1    26  0.03703704</span></span>
+<span id="cb9-45"><a href="part-2.-run-the-detectorclassifier.html#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Time difference of 0.06041408 secs</span></span>
+<span id="cb9-46"><a href="part-2.-run-the-detectorclassifier.html#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Classifying for target signal female.gibbon&quot;</span></span>
+<span id="cb9-47"><a href="part-2.-run-the-detectorclassifier.html#cb9-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Computing spectrogram for file S11_20180217_080003 1 out of 1&quot;</span></span>
+<span id="cb9-48"><a href="part-2.-run-the-detectorclassifier.html#cb9-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Running detector over sound files&quot;</span></span>
+<span id="cb9-49"><a href="part-2.-run-the-detectorclassifier.html#cb9-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;Creating datasheet&quot;</span></span>
+<span id="cb9-50"><a href="part-2.-run-the-detectorclassifier.html#cb9-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] &quot;System processed 7201 seconds in 14 seconds this translates to 508.3 hours processed in 1 hour&quot;</span></span></code></pre></div>
 
 </div>
 </div>

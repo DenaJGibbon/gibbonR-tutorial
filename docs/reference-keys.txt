@@ -1,5 +1,5 @@
-getting-started
-you-can-install-the-development-version-from-github-with
+package-installation
+package-summary
 part-1.-prepare-training-data
 part-1a.-training-data-with-labeled-.wav-clips
 read-in-clips-and-calculate-mfccs
@@ -11,7 +11,7 @@ now-read-in-clips-based-on-raven-selection-tables-and-calculate-mfccs
 compare-random-forest-and-support-vector-machine-for-supervised-classification-1
 part-2.-run-the-detectorclassifier
 part-2a.-feature-extraction
-part-2b.-run-detectclassify
+part-2b.-run-the-detectorclassifier-using-the-gibbonr-function.
 part-3.-calculate-performance-metrics
 part-3a.-prepare-data-for-performance-metrics
 part-3b.-identify-true-and-false-positives

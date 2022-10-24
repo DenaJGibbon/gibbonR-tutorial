@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 Part 3. Calculate performance metrics | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings</title>
-  <meta name="description" content="4 Part 3. Calculate performance metrics | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings" />
+  <title>5 Part 3. Calculate performance metrics | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings</title>
+  <meta name="description" content="5 Part 3. Calculate performance metrics | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4 Part 3. Calculate performance metrics | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings" />
+  <meta property="og:title" content="5 Part 3. Calculate performance metrics | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="DenaJGibbon/gibbonR-tutorial" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4 Part 3. Calculate performance metrics | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings" />
+  <meta name="twitter:title" content="5 Part 3. Calculate performance metrics | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings" />
   
   
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Dena J. Clink" />
 
 
-<meta name="date" content="2022-10-15" />
+<meta name="date" content="2022-10-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -136,39 +136,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./"> gibbonR </a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Getting started</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Package installation</a></li>
+<li class="chapter" data-level="2" data-path="package-summary.html"><a href="package-summary.html"><i class="fa fa-check"></i><b>2</b> Package summary</a></li>
+<li class="chapter" data-level="3" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html"><i class="fa fa-check"></i><b>3</b> Part 1. Prepare Training Data</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#you-can-install-the-development-version-from-github-with"><i class="fa fa-check"></i><b>1.1</b> You can install the development version from <span>GitHub</span> with:</a></li>
+<li class="chapter" data-level="3.1" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#part-1a.-training-data-with-labeled-.wav-clips"><i class="fa fa-check"></i><b>3.1</b> Part 1A. Training Data with Labeled .wav clips</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#read-in-clips-and-calculate-mfccs"><i class="fa fa-check"></i><b>3.1.1</b> Read in clips and calculate MFCCs</a></li>
+<li class="chapter" data-level="3.1.2" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#compare-random-forest-and-support-vector-machine-for-supervised-classification"><i class="fa fa-check"></i><b>3.1.2</b> Compare Random Forest and Support Vector Machine for Supervised Classification</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html"><i class="fa fa-check"></i><b>2</b> Part 1. Prepare Training Data</a>
+<li class="chapter" data-level="3.2" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#part-1b.-training-data-with-raven-selection-tables"><i class="fa fa-check"></i><b>3.2</b> Part 1B. Training Data with Raven Selection Tables</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#part-1a.-training-data-with-labeled-.wav-clips"><i class="fa fa-check"></i><b>2.1</b> Part 1A. Training Data with Labeled .wav clips</a>
-<ul>
-<li class="chapter" data-level="2.1.1" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#read-in-clips-and-calculate-mfccs"><i class="fa fa-check"></i><b>2.1.1</b> Read in clips and calculate MFCCs</a></li>
-<li class="chapter" data-level="2.1.2" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#compare-random-forest-and-support-vector-machine-for-supervised-classification"><i class="fa fa-check"></i><b>2.1.2</b> Compare Random Forest and Support Vector Machine for Supervised Classification</a></li>
-</ul></li>
-<li class="chapter" data-level="2.2" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#part-1b.-training-data-with-raven-selection-tables"><i class="fa fa-check"></i><b>2.2</b> Part 1B. Training Data with Raven Selection Tables</a>
-<ul>
-<li class="chapter" data-level="2.2.1" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#prepare-training-data-from-labeled-annotations"><i class="fa fa-check"></i><b>2.2.1</b> Prepare training data from labeled annotations</a></li>
-<li class="chapter" data-level="2.2.2" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#prepare-noise-training-data-from-files-without-target-signal"><i class="fa fa-check"></i><b>2.2.2</b> Prepare noise training data from files without target signal</a></li>
-<li class="chapter" data-level="2.2.3" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#now-read-in-clips-based-on-raven-selection-tables-and-calculate-mfccs"><i class="fa fa-check"></i><b>2.2.3</b> Now read in clips based on Raven Selection tables and calculate MFCCs</a></li>
-<li class="chapter" data-level="2.2.4" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#compare-random-forest-and-support-vector-machine-for-supervised-classification-1"><i class="fa fa-check"></i><b>2.2.4</b> Compare Random Forest and Support Vector Machine for Supervised Classification</a></li>
+<li class="chapter" data-level="3.2.1" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#prepare-training-data-from-labeled-annotations"><i class="fa fa-check"></i><b>3.2.1</b> Prepare training data from labeled annotations</a></li>
+<li class="chapter" data-level="3.2.2" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#prepare-noise-training-data-from-files-without-target-signal"><i class="fa fa-check"></i><b>3.2.2</b> Prepare noise training data from files without target signal</a></li>
+<li class="chapter" data-level="3.2.3" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#now-read-in-clips-based-on-raven-selection-tables-and-calculate-mfccs"><i class="fa fa-check"></i><b>3.2.3</b> Now read in clips based on Raven Selection tables and calculate MFCCs</a></li>
+<li class="chapter" data-level="3.2.4" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#compare-random-forest-and-support-vector-machine-for-supervised-classification-1"><i class="fa fa-check"></i><b>3.2.4</b> Compare Random Forest and Support Vector Machine for Supervised Classification</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="part-2.-run-the-detectorclassifier.html"><a href="part-2.-run-the-detectorclassifier.html"><i class="fa fa-check"></i><b>3</b> Part 2. Run the detector/classifier</a>
+<li class="chapter" data-level="4" data-path="part-2.-run-the-detectorclassifier.html"><a href="part-2.-run-the-detectorclassifier.html"><i class="fa fa-check"></i><b>4</b> Part 2. Run the detector/classifier</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="part-2.-run-the-detectorclassifier.html"><a href="part-2.-run-the-detectorclassifier.html#part-2a.-feature-extraction"><i class="fa fa-check"></i><b>3.1</b> Part 2a. Feature extraction</a></li>
-<li class="chapter" data-level="3.2" data-path="part-2.-run-the-detectorclassifier.html"><a href="part-2.-run-the-detectorclassifier.html#part-2b.-run-detectclassify"><i class="fa fa-check"></i><b>3.2</b> Part 2b. Run DetectClassify</a></li>
+<li class="chapter" data-level="4.1" data-path="part-2.-run-the-detectorclassifier.html"><a href="part-2.-run-the-detectorclassifier.html#part-2a.-feature-extraction"><i class="fa fa-check"></i><b>4.1</b> Part 2a. Feature extraction</a></li>
+<li class="chapter" data-level="4.2" data-path="part-2.-run-the-detectorclassifier.html"><a href="part-2.-run-the-detectorclassifier.html#part-2b.-run-the-detectorclassifier-using-the-gibbonr-function."><i class="fa fa-check"></i><b>4.2</b> Part 2b. Run the detector/classifier using the ‘gibbonR’ function.</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html"><i class="fa fa-check"></i><b>4</b> Part 3. Calculate performance metrics</a>
+<li class="chapter" data-level="5" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html"><i class="fa fa-check"></i><b>5</b> Part 3. Calculate performance metrics</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html#part-3a.-prepare-data-for-performance-metrics"><i class="fa fa-check"></i><b>4.1</b> Part 3a. Prepare data for performance metrics</a></li>
-<li class="chapter" data-level="4.2" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html#part-3b.-identify-true-and-false-positives"><i class="fa fa-check"></i><b>4.2</b> Part 3b. Identify true and false positives</a></li>
-<li class="chapter" data-level="4.3" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html#part-3c.-calculate-and-plot-performance-metrics-using-rocr"><i class="fa fa-check"></i><b>4.3</b> Part 3c. Calculate and plot performance metrics using ‘ROCR’</a></li>
+<li class="chapter" data-level="5.1" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html#part-3a.-prepare-data-for-performance-metrics"><i class="fa fa-check"></i><b>5.1</b> Part 3a. Prepare data for performance metrics</a></li>
+<li class="chapter" data-level="5.2" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html#part-3b.-identify-true-and-false-positives"><i class="fa fa-check"></i><b>5.2</b> Part 3b. Identify true and false positives</a></li>
+<li class="chapter" data-level="5.3" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html#part-3c.-calculate-and-plot-performance-metrics-using-rocr"><i class="fa fa-check"></i><b>5.3</b> Part 3c. Calculate and plot performance metrics using ‘ROCR’</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="part-4.-data-visualization.html"><a href="part-4.-data-visualization.html"><i class="fa fa-check"></i><b>5</b> Part 4. Data visualization</a>
+<li class="chapter" data-level="6" data-path="part-4.-data-visualization.html"><a href="part-4.-data-visualization.html"><i class="fa fa-check"></i><b>6</b> Part 4. Data visualization</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="part-4.-data-visualization.html"><a href="part-4.-data-visualization.html#part-4a.-create-a-umap-plot-colored-by-class"><i class="fa fa-check"></i><b>5.1</b> Part 4a. Create a UMAP plot colored by class</a></li>
+<li class="chapter" data-level="6.1" data-path="part-4.-data-visualization.html"><a href="part-4.-data-visualization.html#part-4a.-create-a-umap-plot-colored-by-class"><i class="fa fa-check"></i><b>6.1</b> Part 4a. Create a UMAP plot colored by class</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -190,10 +188,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="part-3.-calculate-performance-metrics" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">4</span> Part 3. Calculate performance metrics<a href="part-3.-calculate-performance-metrics.html#part-3.-calculate-performance-metrics" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="part-3a.-prepare-data-for-performance-metrics" class="section level2 hasAnchor" number="4.1">
-<h2><span class="header-section-number">4.1</span> Part 3a. Prepare data for performance metrics<a href="part-3.-calculate-performance-metrics.html#part-3a.-prepare-data-for-performance-metrics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="part-3.-calculate-performance-metrics" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">5</span> Part 3. Calculate performance metrics<a href="part-3.-calculate-performance-metrics.html#part-3.-calculate-performance-metrics" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="part-3a.-prepare-data-for-performance-metrics" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Part 3a. Prepare data for performance metrics<a href="part-3.-calculate-performance-metrics.html#part-3a.-prepare-data-for-performance-metrics" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="part-3.-calculate-performance-metrics.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set location of test file selection tables</span></span>
 <span id="cb10-2"><a href="part-3.-calculate-performance-metrics.html#cb10-2" aria-hidden="true" tabindex="-1"></a>input.dir.text.files <span class="ot">&lt;-</span> <span class="st">&quot;/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/SelectionTables/GibbonTestSelectionTables&quot;</span></span>
 <span id="cb10-3"><a href="part-3.-calculate-performance-metrics.html#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -223,8 +221,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb10-27"><a href="part-3.-calculate-performance-metrics.html#cb10-27" aria-hidden="true" tabindex="-1"></a>  all.detections <span class="ot">&lt;-</span> <span class="fu">rbind.data.frame</span>(all.detections,temp.table.updated)</span>
 <span id="cb10-28"><a href="part-3.-calculate-performance-metrics.html#cb10-28" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </div>
-<div id="part-3b.-identify-true-and-false-positives" class="section level2 hasAnchor" number="4.2">
-<h2><span class="header-section-number">4.2</span> Part 3b. Identify true and false positives<a href="part-3.-calculate-performance-metrics.html#part-3b.-identify-true-and-false-positives" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="part-3b.-identify-true-and-false-positives" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Part 3b. Identify true and false positives<a href="part-3.-calculate-performance-metrics.html#part-3b.-identify-true-and-false-positives" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="part-3.-calculate-performance-metrics.html#cb11-1" aria-hidden="true" tabindex="-1"></a>  OutputDirectory <span class="ot">&lt;-</span>  <span class="st">&quot;/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/DetectAndClassifyOutput&quot;</span></span>
 <span id="cb11-2"><a href="part-3.-calculate-performance-metrics.html#cb11-2" aria-hidden="true" tabindex="-1"></a>    </span>
 <span id="cb11-3"><a href="part-3.-calculate-performance-metrics.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  all.combinedprecision.recall.randomiter <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
@@ -292,8 +290,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb11-65"><a href="part-3.-calculate-performance-metrics.html#cb11-65" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb11-66"><a href="part-3.-calculate-performance-metrics.html#cb11-66" aria-hidden="true" tabindex="-1"></a>  </span></code></pre></div>
 </div>
-<div id="part-3c.-calculate-and-plot-performance-metrics-using-rocr" class="section level2 hasAnchor" number="4.3">
-<h2><span class="header-section-number">4.3</span> Part 3c. Calculate and plot performance metrics using ‘ROCR’<a href="part-3.-calculate-performance-metrics.html#part-3c.-calculate-and-plot-performance-metrics-using-rocr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="part-3c.-calculate-and-plot-performance-metrics-using-rocr" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Part 3c. Calculate and plot performance metrics using ‘ROCR’<a href="part-3.-calculate-performance-metrics.html#part-3c.-calculate-and-plot-performance-metrics-using-rocr" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="part-3.-calculate-performance-metrics.html#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ROCR)</span>
 <span id="cb12-2"><a href="part-3.-calculate-performance-metrics.html#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="part-3.-calculate-performance-metrics.html#cb12-3" aria-hidden="true" tabindex="-1"></a>auc.df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>()</span>
@@ -340,9 +338,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb12-44"><a href="part-3.-calculate-performance-metrics.html#cb12-44" aria-hidden="true" tabindex="-1"></a>     <span class="at">add=</span><span class="cn">TRUE</span>)</span>
 <span id="cb12-45"><a href="part-3.-calculate-performance-metrics.html#cb12-45" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-46"><a href="part-3.-calculate-performance-metrics.html#cb12-46" aria-hidden="true" tabindex="-1"></a>  }  </span>
-<span id="cb12-47"><a href="part-3.-calculate-performance-metrics.html#cb12-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.5826324</span></span></code></pre></div>
+<span id="cb12-47"><a href="part-3.-calculate-performance-metrics.html#cb12-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.5734228</span></span></code></pre></div>
 <p><img src="gibbonR_tutorial_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
-<pre><code>#&gt; [1] 0.9433168</code></pre>
+<pre><code>#&gt; [1] 0.9422317</code></pre>
 <p><img src="gibbonR_tutorial_files/figure-html/unnamed-chunk-13-2.png" width="672" /></p>
 
 </div>

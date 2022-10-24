@@ -7,7 +7,7 @@ In 'gibbonR' there are two ways that you can format your training data. The firs
 TrainingWavFilesDir <- 
   "/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/MultipleSoundClasses/"
 
-trainingdata <- gibbonR::MFCCFunction(input.dir=TrainingWavFilesDir, min.freq = 400, max.freq = 1600,win.avg="TRUE")
+trainingdata <- gibbonR::MFCCFunction(input.dir=TrainingWavFilesDir, min.freq = 400, max.freq = 1600,win.avg="standard")
 
 
 trainingdata$class <- as.factor(trainingdata$class)
@@ -122,7 +122,7 @@ for(i in 1:length(NoiseSelectionTables)){
 TrainingWavFilesDir <- 
   "/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/TrainingDataFromRavenSelectionTables/"
 
-trainingdata <- gibbonR::MFCCFunction(input.dir=TrainingWavFilesDir, min.freq = 400, max.freq = 1600,win.avg="TRUE")
+trainingdata <- gibbonR::MFCCFunction(input.dir=TrainingWavFilesDir, min.freq = 400, max.freq = 1600,win.avg="standard")
 
 
 trainingdata$class <- as.factor(trainingdata$class)

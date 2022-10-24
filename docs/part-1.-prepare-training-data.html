@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>2 Part 1. Prepare Training Data | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings</title>
-  <meta name="description" content="2 Part 1. Prepare Training Data | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings" />
+  <title>3 Part 1. Prepare Training Data | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings</title>
+  <meta name="description" content="3 Part 1. Prepare Training Data | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings" />
   <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="2 Part 1. Prepare Training Data | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings" />
+  <meta property="og:title" content="3 Part 1. Prepare Training Data | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings" />
   <meta property="og:type" content="book" />
   
   
   <meta name="github-repo" content="DenaJGibbon/gibbonR-tutorial" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="2 Part 1. Prepare Training Data | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings" />
+  <meta name="twitter:title" content="3 Part 1. Prepare Training Data | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings" />
   
   
   
@@ -23,14 +23,14 @@
 <meta name="author" content="Dena J. Clink" />
 
 
-<meta name="date" content="2022-10-15" />
+<meta name="date" content="2022-10-24" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="index.html"/>
+<link rel="prev" href="package-summary.html"/>
 <link rel="next" href="part-2.-run-the-detectorclassifier.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -136,39 +136,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./"> gibbonR </a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Getting started</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Package installation</a></li>
+<li class="chapter" data-level="2" data-path="package-summary.html"><a href="package-summary.html"><i class="fa fa-check"></i><b>2</b> Package summary</a></li>
+<li class="chapter" data-level="3" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html"><i class="fa fa-check"></i><b>3</b> Part 1. Prepare Training Data</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#you-can-install-the-development-version-from-github-with"><i class="fa fa-check"></i><b>1.1</b> You can install the development version from <span>GitHub</span> with:</a></li>
+<li class="chapter" data-level="3.1" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#part-1a.-training-data-with-labeled-.wav-clips"><i class="fa fa-check"></i><b>3.1</b> Part 1A. Training Data with Labeled .wav clips</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#read-in-clips-and-calculate-mfccs"><i class="fa fa-check"></i><b>3.1.1</b> Read in clips and calculate MFCCs</a></li>
+<li class="chapter" data-level="3.1.2" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#compare-random-forest-and-support-vector-machine-for-supervised-classification"><i class="fa fa-check"></i><b>3.1.2</b> Compare Random Forest and Support Vector Machine for Supervised Classification</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html"><i class="fa fa-check"></i><b>2</b> Part 1. Prepare Training Data</a>
+<li class="chapter" data-level="3.2" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#part-1b.-training-data-with-raven-selection-tables"><i class="fa fa-check"></i><b>3.2</b> Part 1B. Training Data with Raven Selection Tables</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#part-1a.-training-data-with-labeled-.wav-clips"><i class="fa fa-check"></i><b>2.1</b> Part 1A. Training Data with Labeled .wav clips</a>
-<ul>
-<li class="chapter" data-level="2.1.1" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#read-in-clips-and-calculate-mfccs"><i class="fa fa-check"></i><b>2.1.1</b> Read in clips and calculate MFCCs</a></li>
-<li class="chapter" data-level="2.1.2" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#compare-random-forest-and-support-vector-machine-for-supervised-classification"><i class="fa fa-check"></i><b>2.1.2</b> Compare Random Forest and Support Vector Machine for Supervised Classification</a></li>
-</ul></li>
-<li class="chapter" data-level="2.2" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#part-1b.-training-data-with-raven-selection-tables"><i class="fa fa-check"></i><b>2.2</b> Part 1B. Training Data with Raven Selection Tables</a>
-<ul>
-<li class="chapter" data-level="2.2.1" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#prepare-training-data-from-labeled-annotations"><i class="fa fa-check"></i><b>2.2.1</b> Prepare training data from labeled annotations</a></li>
-<li class="chapter" data-level="2.2.2" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#prepare-noise-training-data-from-files-without-target-signal"><i class="fa fa-check"></i><b>2.2.2</b> Prepare noise training data from files without target signal</a></li>
-<li class="chapter" data-level="2.2.3" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#now-read-in-clips-based-on-raven-selection-tables-and-calculate-mfccs"><i class="fa fa-check"></i><b>2.2.3</b> Now read in clips based on Raven Selection tables and calculate MFCCs</a></li>
-<li class="chapter" data-level="2.2.4" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#compare-random-forest-and-support-vector-machine-for-supervised-classification-1"><i class="fa fa-check"></i><b>2.2.4</b> Compare Random Forest and Support Vector Machine for Supervised Classification</a></li>
+<li class="chapter" data-level="3.2.1" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#prepare-training-data-from-labeled-annotations"><i class="fa fa-check"></i><b>3.2.1</b> Prepare training data from labeled annotations</a></li>
+<li class="chapter" data-level="3.2.2" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#prepare-noise-training-data-from-files-without-target-signal"><i class="fa fa-check"></i><b>3.2.2</b> Prepare noise training data from files without target signal</a></li>
+<li class="chapter" data-level="3.2.3" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#now-read-in-clips-based-on-raven-selection-tables-and-calculate-mfccs"><i class="fa fa-check"></i><b>3.2.3</b> Now read in clips based on Raven Selection tables and calculate MFCCs</a></li>
+<li class="chapter" data-level="3.2.4" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#compare-random-forest-and-support-vector-machine-for-supervised-classification-1"><i class="fa fa-check"></i><b>3.2.4</b> Compare Random Forest and Support Vector Machine for Supervised Classification</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="part-2.-run-the-detectorclassifier.html"><a href="part-2.-run-the-detectorclassifier.html"><i class="fa fa-check"></i><b>3</b> Part 2. Run the detector/classifier</a>
+<li class="chapter" data-level="4" data-path="part-2.-run-the-detectorclassifier.html"><a href="part-2.-run-the-detectorclassifier.html"><i class="fa fa-check"></i><b>4</b> Part 2. Run the detector/classifier</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="part-2.-run-the-detectorclassifier.html"><a href="part-2.-run-the-detectorclassifier.html#part-2a.-feature-extraction"><i class="fa fa-check"></i><b>3.1</b> Part 2a. Feature extraction</a></li>
-<li class="chapter" data-level="3.2" data-path="part-2.-run-the-detectorclassifier.html"><a href="part-2.-run-the-detectorclassifier.html#part-2b.-run-detectclassify"><i class="fa fa-check"></i><b>3.2</b> Part 2b. Run DetectClassify</a></li>
+<li class="chapter" data-level="4.1" data-path="part-2.-run-the-detectorclassifier.html"><a href="part-2.-run-the-detectorclassifier.html#part-2a.-feature-extraction"><i class="fa fa-check"></i><b>4.1</b> Part 2a. Feature extraction</a></li>
+<li class="chapter" data-level="4.2" data-path="part-2.-run-the-detectorclassifier.html"><a href="part-2.-run-the-detectorclassifier.html#part-2b.-run-the-detectorclassifier-using-the-gibbonr-function."><i class="fa fa-check"></i><b>4.2</b> Part 2b. Run the detector/classifier using the ‘gibbonR’ function.</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html"><i class="fa fa-check"></i><b>4</b> Part 3. Calculate performance metrics</a>
+<li class="chapter" data-level="5" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html"><i class="fa fa-check"></i><b>5</b> Part 3. Calculate performance metrics</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html#part-3a.-prepare-data-for-performance-metrics"><i class="fa fa-check"></i><b>4.1</b> Part 3a. Prepare data for performance metrics</a></li>
-<li class="chapter" data-level="4.2" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html#part-3b.-identify-true-and-false-positives"><i class="fa fa-check"></i><b>4.2</b> Part 3b. Identify true and false positives</a></li>
-<li class="chapter" data-level="4.3" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html#part-3c.-calculate-and-plot-performance-metrics-using-rocr"><i class="fa fa-check"></i><b>4.3</b> Part 3c. Calculate and plot performance metrics using ‘ROCR’</a></li>
+<li class="chapter" data-level="5.1" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html#part-3a.-prepare-data-for-performance-metrics"><i class="fa fa-check"></i><b>5.1</b> Part 3a. Prepare data for performance metrics</a></li>
+<li class="chapter" data-level="5.2" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html#part-3b.-identify-true-and-false-positives"><i class="fa fa-check"></i><b>5.2</b> Part 3b. Identify true and false positives</a></li>
+<li class="chapter" data-level="5.3" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html#part-3c.-calculate-and-plot-performance-metrics-using-rocr"><i class="fa fa-check"></i><b>5.3</b> Part 3c. Calculate and plot performance metrics using ‘ROCR’</a></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="part-4.-data-visualization.html"><a href="part-4.-data-visualization.html"><i class="fa fa-check"></i><b>5</b> Part 4. Data visualization</a>
+<li class="chapter" data-level="6" data-path="part-4.-data-visualization.html"><a href="part-4.-data-visualization.html"><i class="fa fa-check"></i><b>6</b> Part 4. Data visualization</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="part-4.-data-visualization.html"><a href="part-4.-data-visualization.html#part-4a.-create-a-umap-plot-colored-by-class"><i class="fa fa-check"></i><b>5.1</b> Part 4a. Create a UMAP plot colored by class</a></li>
+<li class="chapter" data-level="6.1" data-path="part-4.-data-visualization.html"><a href="part-4.-data-visualization.html#part-4a.-create-a-umap-plot-colored-by-class"><i class="fa fa-check"></i><b>6.1</b> Part 4a. Create a UMAP plot colored by class</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -190,23 +188,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="part-1.-prepare-training-data" class="section level1 hasAnchor" number="2">
-<h1><span class="header-section-number">2</span> Part 1. Prepare Training Data<a href="part-1.-prepare-training-data.html#part-1.-prepare-training-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="part-1.-prepare-training-data" class="section level1 hasAnchor" number="3">
+<h1><span class="header-section-number">3</span> Part 1. Prepare Training Data<a href="part-1.-prepare-training-data.html#part-1.-prepare-training-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>In ‘gibbonR’ there are two ways that you can format your training data. The first can be a set of labelled .wav clips with the class indicated in the name of the file (e.g., ‘gibbon_01.wav’ and ‘noise_01.wav’). The second is to have a folder of selection tables created in Raven Pro (K. Lisa Yang Center for Conservation Bioacoustics) and a folder with the associated ‘.wav’ files. For the second approach there must be an annotation column indicating the call type and it is assumed that all signals of interest are annotated, and the rest of the files contain only background noise.</p>
-<div id="part-1a.-training-data-with-labeled-.wav-clips" class="section level2 hasAnchor" number="2.1">
-<h2><span class="header-section-number">2.1</span> Part 1A. Training Data with Labeled .wav clips<a href="part-1.-prepare-training-data.html#part-1a.-training-data-with-labeled-.wav-clips" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="read-in-clips-and-calculate-mfccs" class="section level3 hasAnchor" number="2.1.1">
-<h3><span class="header-section-number">2.1.1</span> Read in clips and calculate MFCCs<a href="part-1.-prepare-training-data.html#read-in-clips-and-calculate-mfccs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="part-1a.-training-data-with-labeled-.wav-clips" class="section level2 hasAnchor" number="3.1">
+<h2><span class="header-section-number">3.1</span> Part 1A. Training Data with Labeled .wav clips<a href="part-1.-prepare-training-data.html#part-1a.-training-data-with-labeled-.wav-clips" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="read-in-clips-and-calculate-mfccs" class="section level3 hasAnchor" number="3.1.1">
+<h3><span class="header-section-number">3.1.1</span> Read in clips and calculate MFCCs<a href="part-1.-prepare-training-data.html#read-in-clips-and-calculate-mfccs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="part-1.-prepare-training-data.html#cb2-1" aria-hidden="true" tabindex="-1"></a>TrainingWavFilesDir <span class="ot">&lt;-</span> </span>
 <span id="cb2-2"><a href="part-1.-prepare-training-data.html#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/MultipleSoundClasses/&quot;</span></span>
 <span id="cb2-3"><a href="part-1.-prepare-training-data.html#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="part-1.-prepare-training-data.html#cb2-4" aria-hidden="true" tabindex="-1"></a>trainingdata <span class="ot">&lt;-</span> gibbonR<span class="sc">::</span><span class="fu">MFCCFunction</span>(<span class="at">input.dir=</span>TrainingWavFilesDir, <span class="at">min.freq =</span> <span class="dv">400</span>, <span class="at">max.freq =</span> <span class="dv">1600</span>,<span class="at">win.avg=</span><span class="st">&quot;TRUE&quot;</span>)</span>
+<span id="cb2-4"><a href="part-1.-prepare-training-data.html#cb2-4" aria-hidden="true" tabindex="-1"></a>trainingdata <span class="ot">&lt;-</span> gibbonR<span class="sc">::</span><span class="fu">MFCCFunction</span>(<span class="at">input.dir=</span>TrainingWavFilesDir, <span class="at">min.freq =</span> <span class="dv">400</span>, <span class="at">max.freq =</span> <span class="dv">1600</span>,<span class="at">win.avg=</span><span class="st">&quot;standard&quot;</span>)</span>
 <span id="cb2-5"><a href="part-1.-prepare-training-data.html#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-6"><a href="part-1.-prepare-training-data.html#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-7"><a href="part-1.-prepare-training-data.html#cb2-7" aria-hidden="true" tabindex="-1"></a>trainingdata<span class="sc">$</span>class <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(trainingdata<span class="sc">$</span>class)</span></code></pre></div>
 </div>
-<div id="compare-random-forest-and-support-vector-machine-for-supervised-classification" class="section level3 hasAnchor" number="2.1.2">
-<h3><span class="header-section-number">2.1.2</span> Compare Random Forest and Support Vector Machine for Supervised Classification<a href="part-1.-prepare-training-data.html#compare-random-forest-and-support-vector-machine-for-supervised-classification" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="compare-random-forest-and-support-vector-machine-for-supervised-classification" class="section level3 hasAnchor" number="3.1.2">
+<h3><span class="header-section-number">3.1.2</span> Compare Random Forest and Support Vector Machine for Supervised Classification<a href="part-1.-prepare-training-data.html#compare-random-forest-and-support-vector-machine-for-supervised-classification" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="part-1.-prepare-training-data.html#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-2"><a href="part-1.-prepare-training-data.html#cb3-2" aria-hidden="true" tabindex="-1"></a>trainingdata<span class="sc">$</span>class <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(trainingdata<span class="sc">$</span>class)</span>
 <span id="cb3-3"><a href="part-1.-prepare-training-data.html#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -233,16 +231,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-24"><a href="part-1.-prepare-training-data.html#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         OOB estimate of  error rate: 10.67%</span></span>
 <span id="cb3-25"><a href="part-1.-prepare-training-data.html#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Confusion matrix:</span></span>
 <span id="cb3-26"><a href="part-1.-prepare-training-data.html#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;               female.gibbon leaf.monkey noise solo.gibbon class.error</span></span>
-<span id="cb3-27"><a href="part-1.-prepare-training-data.html#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; female.gibbon            17           0     1           2        0.15</span></span>
-<span id="cb3-28"><a href="part-1.-prepare-training-data.html#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; leaf.monkey               0          12     3           0        0.20</span></span>
-<span id="cb3-29"><a href="part-1.-prepare-training-data.html#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; noise                     0           0    19           1        0.05</span></span>
-<span id="cb3-30"><a href="part-1.-prepare-training-data.html#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; solo.gibbon               0           0     1          19        0.05</span></span></code></pre></div>
+<span id="cb3-27"><a href="part-1.-prepare-training-data.html#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; female.gibbon            18           0     2           0   0.1000000</span></span>
+<span id="cb3-28"><a href="part-1.-prepare-training-data.html#cb3-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; leaf.monkey               0          11     4           0   0.2666667</span></span>
+<span id="cb3-29"><a href="part-1.-prepare-training-data.html#cb3-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; noise                     0           0    19           1   0.0500000</span></span>
+<span id="cb3-30"><a href="part-1.-prepare-training-data.html#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; solo.gibbon               0           1     0          19   0.0500000</span></span></code></pre></div>
 </div>
 </div>
-<div id="part-1b.-training-data-with-raven-selection-tables" class="section level2 hasAnchor" number="2.2">
-<h2><span class="header-section-number">2.2</span> Part 1B. Training Data with Raven Selection Tables<a href="part-1.-prepare-training-data.html#part-1b.-training-data-with-raven-selection-tables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div id="prepare-training-data-from-labeled-annotations" class="section level3 hasAnchor" number="2.2.1">
-<h3><span class="header-section-number">2.2.1</span> Prepare training data from labeled annotations<a href="part-1.-prepare-training-data.html#prepare-training-data-from-labeled-annotations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="part-1b.-training-data-with-raven-selection-tables" class="section level2 hasAnchor" number="3.2">
+<h2><span class="header-section-number">3.2</span> Part 1B. Training Data with Raven Selection Tables<a href="part-1.-prepare-training-data.html#part-1b.-training-data-with-raven-selection-tables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="prepare-training-data-from-labeled-annotations" class="section level3 hasAnchor" number="3.2.1">
+<h3><span class="header-section-number">3.2.1</span> Prepare training data from labeled annotations<a href="part-1.-prepare-training-data.html#prepare-training-data-from-labeled-annotations" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="part-1.-prepare-training-data.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify the folder where the training data will be saved</span></span>
 <span id="cb4-2"><a href="part-1.-prepare-training-data.html#cb4-2" aria-hidden="true" tabindex="-1"></a>TrainingDataFolderLocation <span class="ot">&lt;-</span> <span class="st">&quot;/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/TrainingDataFromRavenSelectionTables&quot;</span></span>
 <span id="cb4-3"><a href="part-1.-prepare-training-data.html#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -281,8 +279,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-36"><a href="part-1.-prepare-training-data.html#cb4-36" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb4-37"><a href="part-1.-prepare-training-data.html#cb4-37" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </div>
-<div id="prepare-noise-training-data-from-files-without-target-signal" class="section level3 hasAnchor" number="2.2.2">
-<h3><span class="header-section-number">2.2.2</span> Prepare noise training data from files without target signal<a href="part-1.-prepare-training-data.html#prepare-noise-training-data-from-files-without-target-signal" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="prepare-noise-training-data-from-files-without-target-signal" class="section level3 hasAnchor" number="3.2.2">
+<h3><span class="header-section-number">3.2.2</span> Prepare noise training data from files without target signal<a href="part-1.-prepare-training-data.html#prepare-noise-training-data-from-files-without-target-signal" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="part-1.-prepare-training-data.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify the folder where the training data will be saved</span></span>
 <span id="cb5-2"><a href="part-1.-prepare-training-data.html#cb5-2" aria-hidden="true" tabindex="-1"></a>TrainingDataFolderLocation <span class="ot">&lt;-</span> <span class="st">&quot;/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/TrainingDataFromRavenSelectionTables/&quot;</span></span>
 <span id="cb5-3"><a href="part-1.-prepare-training-data.html#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -320,19 +318,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-35"><a href="part-1.-prepare-training-data.html#cb5-35" aria-hidden="true" tabindex="-1"></a>           <span class="at">random.sample=</span><span class="cn">FALSE</span>)</span>
 <span id="cb5-36"><a href="part-1.-prepare-training-data.html#cb5-36" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </div>
-<div id="now-read-in-clips-based-on-raven-selection-tables-and-calculate-mfccs" class="section level3 hasAnchor" number="2.2.3">
-<h3><span class="header-section-number">2.2.3</span> Now read in clips based on Raven Selection tables and calculate MFCCs<a href="part-1.-prepare-training-data.html#now-read-in-clips-based-on-raven-selection-tables-and-calculate-mfccs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="now-read-in-clips-based-on-raven-selection-tables-and-calculate-mfccs" class="section level3 hasAnchor" number="3.2.3">
+<h3><span class="header-section-number">3.2.3</span> Now read in clips based on Raven Selection tables and calculate MFCCs<a href="part-1.-prepare-training-data.html#now-read-in-clips-based-on-raven-selection-tables-and-calculate-mfccs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="part-1.-prepare-training-data.html#cb6-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-2"><a href="part-1.-prepare-training-data.html#cb6-2" aria-hidden="true" tabindex="-1"></a>TrainingWavFilesDir <span class="ot">&lt;-</span> </span>
 <span id="cb6-3"><a href="part-1.-prepare-training-data.html#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/TrainingDataFromRavenSelectionTables/&quot;</span></span>
 <span id="cb6-4"><a href="part-1.-prepare-training-data.html#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="part-1.-prepare-training-data.html#cb6-5" aria-hidden="true" tabindex="-1"></a>trainingdata <span class="ot">&lt;-</span> gibbonR<span class="sc">::</span><span class="fu">MFCCFunction</span>(<span class="at">input.dir=</span>TrainingWavFilesDir, <span class="at">min.freq =</span> <span class="dv">400</span>, <span class="at">max.freq =</span> <span class="dv">1600</span>,<span class="at">win.avg=</span><span class="st">&quot;TRUE&quot;</span>)</span>
+<span id="cb6-5"><a href="part-1.-prepare-training-data.html#cb6-5" aria-hidden="true" tabindex="-1"></a>trainingdata <span class="ot">&lt;-</span> gibbonR<span class="sc">::</span><span class="fu">MFCCFunction</span>(<span class="at">input.dir=</span>TrainingWavFilesDir, <span class="at">min.freq =</span> <span class="dv">400</span>, <span class="at">max.freq =</span> <span class="dv">1600</span>,<span class="at">win.avg=</span><span class="st">&quot;standard&quot;</span>)</span>
 <span id="cb6-6"><a href="part-1.-prepare-training-data.html#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-7"><a href="part-1.-prepare-training-data.html#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-8"><a href="part-1.-prepare-training-data.html#cb6-8" aria-hidden="true" tabindex="-1"></a>trainingdata<span class="sc">$</span>class <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(trainingdata<span class="sc">$</span>class)</span></code></pre></div>
 </div>
-<div id="compare-random-forest-and-support-vector-machine-for-supervised-classification-1" class="section level3 hasAnchor" number="2.2.4">
-<h3><span class="header-section-number">2.2.4</span> Compare Random Forest and Support Vector Machine for Supervised Classification<a href="part-1.-prepare-training-data.html#compare-random-forest-and-support-vector-machine-for-supervised-classification-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="compare-random-forest-and-support-vector-machine-for-supervised-classification-1" class="section level3 hasAnchor" number="3.2.4">
+<h3><span class="header-section-number">3.2.4</span> Compare Random Forest and Support Vector Machine for Supervised Classification<a href="part-1.-prepare-training-data.html#compare-random-forest-and-support-vector-machine-for-supervised-classification-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="part-1.-prepare-training-data.html#cb7-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-2"><a href="part-1.-prepare-training-data.html#cb7-2" aria-hidden="true" tabindex="-1"></a>trainingdata<span class="sc">$</span>class <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(trainingdata<span class="sc">$</span>class)</span>
 <span id="cb7-3"><a href="part-1.-prepare-training-data.html#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -356,11 +354,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-21"><a href="part-1.-prepare-training-data.html#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                      Number of trees: 500</span></span>
 <span id="cb7-22"><a href="part-1.-prepare-training-data.html#cb7-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; No. of variables tried at each split: 13</span></span>
 <span id="cb7-23"><a href="part-1.-prepare-training-data.html#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb7-24"><a href="part-1.-prepare-training-data.html#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         OOB estimate of  error rate: 5.66%</span></span>
+<span id="cb7-24"><a href="part-1.-prepare-training-data.html#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;         OOB estimate of  error rate: 3.77%</span></span>
 <span id="cb7-25"><a href="part-1.-prepare-training-data.html#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Confusion matrix:</span></span>
 <span id="cb7-26"><a href="part-1.-prepare-training-data.html#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;               female.gibbon noise class.error</span></span>
 <span id="cb7-27"><a href="part-1.-prepare-training-data.html#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; female.gibbon            25     1  0.03846154</span></span>
-<span id="cb7-28"><a href="part-1.-prepare-training-data.html#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; noise                     2    25  0.07407407</span></span></code></pre></div>
+<span id="cb7-28"><a href="part-1.-prepare-training-data.html#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; noise                     1    26  0.03703704</span></span></code></pre></div>
 
 </div>
 </div>
@@ -370,7 +368,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="package-summary.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="part-2.-run-the-detectorclassifier.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
