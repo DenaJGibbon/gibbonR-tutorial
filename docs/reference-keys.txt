@@ -18,3 +18,6 @@ part-3b.-identify-true-and-false-positives
 part-3c.-calculate-and-plot-performance-metrics-using-rocr
 part-4.-data-visualization
 part-4a.-create-a-umap-plot-colored-by-class
+output
+download-the-data-from-github
+part-4b.-create-a-umap-plot-colored-by-affinity-propagation-clustering

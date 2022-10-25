@@ -1,11 +1,73 @@
 # Part 1. Prepare Training Data
 In 'gibbonR' there are two ways that you can format your training data. The first can be a set of labelled .wav clips with the class indicated in the name of the file (e.g., 'gibbon_01.wav' and 'noise_01.wav'). The second is to have a folder of selection tables created in Raven Pro (K. Lisa Yang Center for Conservation Bioacoustics) and a folder with the associated '.wav' files. For the second approach there must be an annotation column indicating the call type and it is assumed that all signals of interest are annotated, and the rest of the files contain only background noise.  
 
+## Download the data from Github
+```{eval=FALSE}
+# You need to tell R where to store the zip files on your computer.
+destination.file.path.zip <-
+  "/Users/denaclink/Downloads/BorneoExampleData.zip"
+
+# You also need to tell R where to save the unzipped files
+destination.file.path <- "/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/"
+
+# This function will download the data from github
+
+utils::download.file("https://github.com/DenaJGibbon/BorneoExampleData/archive/master.zip",
+                     destfile = destination.file.path.zip)
+
+# This function will unzip the file
+utils::unzip(zipfile = destination.file.path.zip,
+             exdir = destination.file.path)
+
+# Examine the contents
+list.of.sound.files <- list.files(paste(destination.file.path,
+                                        "BorneoExampleData-master", "data", sep =
+                                          "/"),
+                                  full.names = T)
+list.of.sound.files
+
+```
+
+Use this function to read in the .RDA file and save it as an R object from https://stackoverflow.com/questions/5577221/how-can-i-load-an-object-into-a-variable-name-that-i-specify-from-an-r-data-file
+
+```{r eval=FALSE}
+loadRData <- function(fileName) {
+  #loads an RData file, and returns it
+  load(fileName)
+  get(ls()[ls() != "fileName"])
+}
+```
+
+This function will load the entire list of r data files
+```{r eval=FALSE}
+list.rda.files <- list()
+for(x in 1:length(list.of.sound.files)){
+  list.rda.files[[x]] <-  loadRData(list.of.sound.files[[x]])
+}
+```
+
+Assign each rda an informative name
+```{r eval=FALSE, warning=FALSE}
+multi.class.list <- list.rda.files[[1]]
+S11_20180219_060002_1800sto3600s <- list.rda.files[[2]]
+```
+
+Now we create a directory with the training .wav files
+```{r eval=FALSE, warning=FALSE}
+TrainingDataDirectory <- "/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/BorneoMultiClass"
+
+for(a in 1:length(multi.class.list)){
+  Temp.element <- multi.class.list[[a]]
+  writeWave(Temp.element[[2]], paste(TrainingDataDirectory,Temp.element[[1]],sep='/'))
+}
+
+```
+
 ## Part 1A. Training Data with Labeled .wav clips
 ### Read in clips and calculate MFCCs
 ```{r echo = T, results = 'hide' }
 TrainingWavFilesDir <- 
-  "/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/MultipleSoundClasses/"
+  "/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/BorneoMultiClass/"
 
 trainingdata <- gibbonR::MFCCFunction(input.dir=TrainingWavFilesDir, min.freq = 400, max.freq = 1600,win.avg="standard")
 
@@ -98,18 +160,16 @@ for(i in 1:length(NoiseSelectionTables)){
            min.freq = 400, 
            max.freq = 1600,
            noise.quantile.val=0.3,
-           file.type='wav',
            spectrogram.window =512,
            pattern.split = ".wav", 
            min.signal.dur = 3,
            max.sound.event.dur = 12, 
-           output = "wav",
            wav.output = "TRUE", 
            output.dir = TrainingDataFolderLocation,
            swift.time=TRUE,
            time.start=06,
            time.stop=11,
-           write.csv.output=TRUE,
+           write.table.output=TRUE,
            verbose=TRUE,
            random.sample=FALSE)
 }
