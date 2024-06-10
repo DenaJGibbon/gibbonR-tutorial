@@ -200,10 +200,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>In ‘gibbonR’ there are two ways that you can format your training data. The first can be a set of labelled .wav clips with the class indicated in the name of the file (e.g., ‘gibbon_01.wav’ and ‘noise_01.wav’). The second is to have a folder of selection tables created in Raven Pro (K. Lisa Yang Center for Conservation Bioacoustics) and a folder with the associated ‘.wav’ files. For the second approach there must be an annotation column indicating the call type and it is assumed that all signals of interest are annotated, and the rest of the files contain only background noise.</p>
 <div id="load-the-library" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> Load the library<a href="part-1.-prepare-training-data.html#load-the-library" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="part-1.-prepare-training-data.html#cb1-1" tabindex="-1"></a><span class="fu">library</span>(gibbonR)</span>
-<span id="cb1-2"><a href="part-1.-prepare-training-data.html#cb1-2" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="part-1.-prepare-training-data.html#cb1-3" tabindex="-1"></a><span class="co"># Set location of downloaded data</span></span>
-<span id="cb1-4"><a href="part-1.-prepare-training-data.html#cb1-4" tabindex="-1"></a>FolderPath <span class="ot">&lt;-</span> <span class="st">&#39;/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/&#39;</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="part-1.-prepare-training-data.html#cb1-1" tabindex="-1"></a><span class="co"># Assume the package is already installed</span></span>
+<span id="cb1-2"><a href="part-1.-prepare-training-data.html#cb1-2" tabindex="-1"></a><span class="fu">library</span>(gibbonR)</span>
+<span id="cb1-3"><a href="part-1.-prepare-training-data.html#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="part-1.-prepare-training-data.html#cb1-4" tabindex="-1"></a><span class="co"># Set location of downloaded data</span></span>
+<span id="cb1-5"><a href="part-1.-prepare-training-data.html#cb1-5" tabindex="-1"></a>FolderPath <span class="ot">&lt;-</span> <span class="st">&#39;/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/&#39;</span></span></code></pre></div>
 </div>
 <div id="download-the-data-from-github" class="section level2 hasAnchor" number="2.2">
 <h2><span class="header-section-number">2.2</span> Download the data from Github<a href="part-1.-prepare-training-data.html#download-the-data-from-github" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -283,7 +284,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="compare-random-forest-and-support-vector-machine-for-supervised-classification" class="section level3 hasAnchor" number="2.3.2">
 <h3><span class="header-section-number">2.3.2</span> Compare Random Forest and Support Vector Machine for Supervised Classification<a href="part-1.-prepare-training-data.html#compare-random-forest-and-support-vector-machine-for-supervised-classification" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Note that this approach uses k-fold cross-validation by splitting the training data into two splits over multiple iterations.</p>
+<p>Note that this approach separates the data into two splits: training and test.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="part-1.-prepare-training-data.html#cb10-1" tabindex="-1"></a><span class="co"># Set seed for reproducilibility</span></span>
 <span id="cb10-2"><a href="part-1.-prepare-training-data.html#cb10-2" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">3</span>)</span>
 <span id="cb10-3"><a href="part-1.-prepare-training-data.html#cb10-3" tabindex="-1"></a></span>
