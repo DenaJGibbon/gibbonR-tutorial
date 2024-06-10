@@ -2,6 +2,8 @@
 
 ## Part 2a. Feature extraction
 ```{r , message= FALSE }
+  library(gibbonR)
+
 # Change this so that it points to the location on your computer
 FolderPath <- '/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/'
 
