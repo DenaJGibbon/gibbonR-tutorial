@@ -7,10 +7,10 @@ In 'gibbonR' there are two ways that you can format your training data. The firs
 ``` {r eval=FALSE}
 # You need to tell R where to store the zip files on your computer.
 destination.file.path.zip <-
-  "/Users/denaclink/Downloads/BorneoExampleData.zip"
+  "data/BorneoExampleData.zip"
 
 # You also need to tell R where to save the unzipped files
-destination.file.path <- "/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/"
+destination.file.path <- "data/"
 
 # This function will download the data from github
 
@@ -42,10 +42,10 @@ loadRData <- function(fileName) {
 This function will load the entire list of r data files
 
 ```{r eval=TRUE}
-devtools::load_all('/Users/denaclink/Desktop/RStudioProjects/gibbonR')
+library(gibbonR)
 
 # You also need to tell R where to save the unzipped files
-destination.file.path <- "/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/"
+destination.file.path <- "data/"
 
 # Examine the contents
 list.of.sound.files <- list.files(paste(destination.file.path,
@@ -70,7 +70,8 @@ S11_20180219_060002_1800sto3600s <- list.rda.files[[2]]
 Now we create a directory with the training .wav files
 
 ```{r eval=TRUE, warning=FALSE}
-TrainingDataDirectory <- "/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/data/BorneoMultiClass/"
+TrainingDataDirectory <- "data/BorneoMultiClass/"
+
 # Create if doesn't already exist
 dir.create(TrainingDataDirectory,recursive = T)
 
@@ -87,12 +88,16 @@ for(a in 1:length(multi.class.list)){
 
 ```{r echo = T, results = 'hide' }
 
-TrainingDataDirectory <- "/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/data/BorneoMultiClass/"
+TrainingDataDirectory <- "data/BorneoMultiClass/"
 
 trainingdata <- gibbonR::MFCCFunction(input.dir=TrainingDataDirectory, min.freq = 400, max.freq = 1600,win.avg="standard")
 
-
+# Convert to a factor
 trainingdata$class <- as.factor(trainingdata$class)
+
+# Output a table to see sample size
+table(trainingdata$class)
+
 ```
 
 ### Compare Random Forest and Support Vector Machine for Supervised Classification
@@ -140,18 +145,25 @@ caret::confusionMatrix(rf.predict.labels,testdata$class)
 ## Part 1B. Training Data with Raven Selection Tables
 
 ### Prepare training data from labeled annotations
-
+The script below points to a Raven selection table and a correspond .wav file, and uses the selection table to cut out the shorter clips based on the annotation.
 ```{r,eval=F }
+# Change this so that it points to the location on your computer
+FolderPath <- '/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/'
+
 # Specify the folder where the training data will be saved
-TrainingDataFolderLocation <- "/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/TrainingDataFromRavenSelectionTables"
+TrainingDataFolderLocation <- paste(FolderPath,"/TrainingDataFromRavenSelectionTables/",
+                                    sep='')
 
 # Directory with annotated selection tables
-AnnotatedSelectionTables <- list.files("/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/SelectionTables/GibbonTrainingSelectionTables/",
+AnnotatedSelectionTables <- list.files( paste(FolderPath,"SelectionTables/GibbonTrainingSelectionTables/",sep=''),
                                        full.names = T)
 
 # Directory with corresponding .wav files
-AnnotatedWaveFiles <- list.files("/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/GibbonTrainingFiles/",full.names = T)
-AnnotatedWaveFilesShort <- list.files("/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/GibbonTrainingFiles/",full.names = F)
+AnnotatedWaveFiles <- list.files(paste(FolderPath,"GibbonTrainingFiles/",sep=''),
+                                 full.names = T)
+
+AnnotatedWaveFilesShort <- basename(AnnotatedWaveFiles)
+
 AnnotatedWaveFilesShort <- str_split_fixed(AnnotatedWaveFilesShort,pattern = '.wav', n=2)[,1]
 
 # Loop to cut out the corresponding annotations into short clips
@@ -183,18 +195,21 @@ for(i in 1: length(AnnotatedSelectionTables)){
 ```
 
 ### Prepare noise training data from files without target signal
-
+The script below uses a band-limited energy detector to identify sounds in the frequency range of interest. The file included does not have any gibbon calls, so all sounds detected will be non-gibbon or noise.
 ```{r eval=F}
-# Specify the folder where the training data will be saved
-TrainingDataFolderLocation <- "/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/TrainingDataFromRavenSelectionTables/"
+# Specify the folder where the training data will be saved (same as above)
+TrainingDataFolderLocation <- paste(FolderPath,"/TrainingDataFromRavenSelectionTables/",
+                                    sep='')
 
 # Directory with annotated selection tables
-NoiseSelectionTables <- list.files("/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/SelectionTables/NoiseSelectionTables/",
+NoiseSelectionTables <- list.files( paste(FolderPath,"/SelectionTables/NoiseSelectionTables/",sep=''),
                                        full.names = T)
 
 # Directory with corresponding .wav files
-NoiseWaveFiles <- list.files("/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/NoiseFiles/",full.names = T)
-NoiseWaveFilesShort <- list.files("/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/NoiseFiles/",full.names = F)
+NoiseWaveFiles <- list.files(paste(FolderPath,"/NoiseFiles/",sep=''),full.names = TRUE)
+
+NoiseWaveFilesShort <- basename(NoiseWaveFiles)
+
 NoiseWaveFilesShort <- str_split_fixed(NoiseWaveFilesShort,pattern = '.wav', n=2)[,1]
 
 for(i in 1:length(NoiseSelectionTables)){

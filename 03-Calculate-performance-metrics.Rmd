@@ -1,3 +1,6 @@
+# Part 3. Calculate performance metrics
+## Part 3a. Load libraries and specify file paths
+Please note this script is very much in development!
 ```{r }
 # Load necessary libraries
 library(stringr)  # For string manipulation
@@ -7,20 +10,25 @@ library(dplyr)    # For data manipulation
 library(data.table) # For sorting the detections
 library(ggplot2)
 
-# NOTE you need to change the file paths below to where your files are located on your computer
+# Change this so that it points to the location on your computer
+FolderPath <- '/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/'
 
-# KSWS Performance Binary --------------------------------------------------------
 
 # Get a list of TopModel result files
-TopModelresults <- list.files('/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/DetectAndClassifyOutput',
+TopModelresults <- list.files('data/DetectAndClassifyOutput',
                               full.names = TRUE)
 
 # Get a list of annotation selection table files
-TestDataSet <- list.files('/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/SelectionTables/GibbonTestSelectionTables',
+TestDataSet <- list.files( paste(FolderPath,"/SelectionTables/GibbonTestSelectionTables", sep=''),
                           full.names = TRUE)
 
-start.time.buffer <- 12
-end.time.buffer <- 12
+```
+
+## Part 3b. Match detections with human annotations
+Now we match the detections from the model to human annotations. The start time/end time buffer tells us how much flexibility the detections can have from the start/end time of the call. If the calls are short, then this should be short.
+```{r }
+start.time.buffer <- 8
+end.time.buffer <- 4
 
 # Preallocate space for TopModelDetectionDF
 TopModelDetectionDF <- data.frame()
@@ -67,7 +75,7 @@ for (f in 1:length(TopModelresults)) {
 
       if (nrow(matched_detections) > 0) {
         # Set signal based on the Call.Type in matched_detections
-        TempRow$signal <- 'Gibbon'
+        TempRow$signal <- 'female.gibbon'
         DetectionList[[length( unlist(DetectionList))+1]] <-  which(TimeBetween == TRUE)
       } else {
         # Set signal to 'Noise' if no corresponding annotation is found
@@ -90,7 +98,7 @@ for (f in 1:length(TopModelresults)) {
     missed_detections$File.Name <- ShortName
     missed_detections$model.type <- 'SVM'
     missed_detections$probability <- 0
-    missed_detections$signal <- 'Gibbon'
+    missed_detections$signal <- 'female.gibbon'
 
     # Append missed detections to TopModelDetectionDF
     TopModelDetectionDF <- rbind.data.frame(TopModelDetectionDF, missed_detections)
@@ -104,7 +112,7 @@ for (f in 1:length(TopModelresults)) {
     missed_detections$File.Name <- ShortName
     missed_detections$model.type <- 'SVM'
     missed_detections$probability <- 0
-    missed_detections$signal <- 'Gibbon'
+    missed_detections$signal <- 'female.gibbon'
 
     # Append missed detections to TopModelDetectionDF
     TopModelDetectionDF <- rbind.data.frame(TopModelDetectionDF, missed_detections)
@@ -117,7 +125,12 @@ for (f in 1:length(TopModelresults)) {
 head(TopModelDetectionDF)
 nrow(TopModelDetectionDF)
 table(TopModelDetectionDF$signal)
+```
 
+
+## Part 3c. Calculate performance metrics
+Now that we have matched annotations and detections we can calculate performance over a number of thresholds
+```{r }
 # Convert signal column to a factor variable
 TopModelDetectionDF$signal <- as.factor(TopModelDetectionDF$signal)
 
@@ -128,7 +141,7 @@ unique(TopModelDetectionDF$signal)
 Thresholds <-seq(0.1,1,0.1)
 
 # Create an empty data frame to store results
-BestF1data.frameGibbonBinary <- data.frame()
+BestF1data.framefemale.gibbonBinary <- data.frame()
 
 # Loop through each threshold value
 for(a in 1:length(Thresholds)){
@@ -137,12 +150,12 @@ for(a in 1:length(Thresholds)){
   TopModelDetectionDF_single <-TopModelDetectionDF
 
   TopModelDetectionDF_single$Predictedsignal <-
-    ifelse(TopModelDetectionDF_single$probability  <=Thresholds[a], 'noise','Gibbon')
+    ifelse(TopModelDetectionDF_single$probability  <=Thresholds[a], 'noise','female.gibbon')
 
   # Calculate confusion matrix using caret package
   caretConf <- caret::confusionMatrix(
     as.factor(TopModelDetectionDF_single$Predictedsignal),
-    as.factor(TopModelDetectionDF_single$signal),positive = 'Gibbon',
+    as.factor(TopModelDetectionDF_single$signal),positive = 'female.gibbon',
     mode = 'everything')
 
 
@@ -153,23 +166,26 @@ for(a in 1:length(Thresholds)){
   FP <- caretConf$table[1,2]
   TN <- sum(caretConf$table[2,])#+JahooAdj
   FPR <-  FP / (FP + TN)
-  # Create a row for the result and add it to the BestF1data.frameGreyGibbon
+  # Create a row for the result and add it to the BestF1data.frameGreyfemale.gibbon
   #TrainingData <- training_data_type
   TempF1Row <- cbind.data.frame(F1, Precision, Recall,FPR)
   TempF1Row$Thresholds <- Thresholds[a]
-  BestF1data.frameGibbonBinary <- rbind.data.frame(BestF1data.frameGibbonBinary, TempF1Row)
+  BestF1data.framefemale.gibbonBinary <- rbind.data.frame(BestF1data.framefemale.gibbonBinary, TempF1Row)
 }
+```
 
-BestF1data.frameGibbonBinary
+## 3d. Plot the results
+We can plot precision, recall, and F1 as a function of the model confidence or threshold. Note that we would expect really great performance, as we only have a small number of training samples. 
+```{r }
 
-GibbonMax <- round(max(na.omit(BestF1data.frameGibbonBinary$F1)),2)
+female.gibbonMax <- round(max(na.omit(BestF1data.framefemale.gibbonBinary$F1)),2)
 
 # Metric plot
-GibbonBinaryPlot <- ggplot(data = BestF1data.frameGibbonBinary, aes(x = Thresholds)) +
+female.gibbonBinaryPlot <- ggplot(data = BestF1data.framefemale.gibbonBinary, aes(x = Thresholds)) +
   geom_line(aes(y = F1, color = "F1", linetype = "F1")) +
   geom_line(aes(y = Precision, color = "Precision", linetype = "Precision")) +
   geom_line(aes(y = Recall, color = "Recall", linetype = "Recall")) +
-  labs(title = paste("Gibbon automated detection (binary) \n max F1:",GibbonMax),
+  labs(title = paste("Female gibbon automated detection (binary) \n max F1:",female.gibbonMax),
        x = "Confidence",
        y = "Values") +
   scale_color_manual(values = c("F1" = "blue", "Precision" = "red", "Recall" = "green"),
@@ -179,5 +195,5 @@ GibbonBinaryPlot <- ggplot(data = BestF1data.frameGibbonBinary, aes(x = Threshol
   theme(legend.title = element_blank())+
   labs(color  = "Guide name", linetype = "Guide name", shape = "Guide name")
 
-GibbonBinaryPlot
+female.gibbonBinaryPlot
 ```

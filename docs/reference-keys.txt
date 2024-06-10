@@ -14,3 +14,12 @@ part-2b.-run-the-detectorclassifier-using-the-gibbonr-function.
 part-4.-data-visualization
 part-4a.-create-a-umap-plot-colored-by-class
 part-4b.-create-a-umap-plot-colored-by-affinity-propagation-clustering
+output
+part-3.-calculate-performance-metrics
+part-3a.-load-libraries-and-specify-file-paths
+part-3b.-now-we-match-the-detections-from-the-model-to-human-annotations.-the-start-timeend-time-buffer-tells-us-how-much-flexibility-the-detections-can-have-from-the-startend-time-of-the-call.-if-the-calls-are-short-then-this-should-be-short.
+part-3c.-now-that-we-have-matched-annotations-and-detections-we-can-calculate-performance-over-a-number-of-thresholds
+section
+part-3b.-match-detections-with-human-annotations
+part-3c.-calculate-performance-metrics
+d.-plot-the-results
