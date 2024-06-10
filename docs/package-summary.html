@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Package summary | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings</title>
   <meta name="description" content="Package summary | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings" />
-  <meta name="generator" content="bookdown 0.26 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Package summary | gibbonR: An R package for the automated detection and classification of female gibbon calls from long-term acoustic recordings" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Dena J. Clink" />
 
 
-<meta name="date" content="2022-10-25" />
+<meta name="date" content="2024-06-10" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -56,7 +56,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -92,7 +92,7 @@ code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -105,7 +105,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -119,6 +119,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -159,15 +163,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1" data-path="part-2.-run-the-detectorclassifier.html"><a href="part-2.-run-the-detectorclassifier.html#part-2a.-feature-extraction"><i class="fa fa-check"></i><b>2.1</b> Part 2a. Feature extraction</a></li>
 <li class="chapter" data-level="2.2" data-path="part-2.-run-the-detectorclassifier.html"><a href="part-2.-run-the-detectorclassifier.html#part-2b.-run-the-detectorclassifier-using-the-gibbonr-function."><i class="fa fa-check"></i><b>2.2</b> Part 2b. Run the detector/classifier using the ‘gibbonR’ function.</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html"><i class="fa fa-check"></i><b>3</b> Part 3. Calculate performance metrics</a>
+<li class="chapter" data-level="3" data-path="part-4.-data-visualization.html"><a href="part-4.-data-visualization.html"><i class="fa fa-check"></i><b>3</b> Part 4. Data visualization</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html#part-3a.-prepare-data-for-performance-metrics"><i class="fa fa-check"></i><b>3.1</b> Part 3a. Prepare data for performance metrics</a></li>
-<li class="chapter" data-level="3.2" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html#part-3b.-identify-true-and-false-positives"><i class="fa fa-check"></i><b>3.2</b> Part 3b. Identify true and false positives</a></li>
-<li class="chapter" data-level="3.3" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html#part-3c.-calculate-and-plot-performance-metrics-using-rocr"><i class="fa fa-check"></i><b>3.3</b> Part 3c. Calculate and plot performance metrics using ‘ROCR’</a></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="part-4.-data-visualization.html"><a href="part-4.-data-visualization.html"><i class="fa fa-check"></i><b>4</b> Part 4. Data visualization</a>
-<ul>
-<li class="chapter" data-level="4.1" data-path="part-4.-data-visualization.html"><a href="part-4.-data-visualization.html#part-4a.-create-a-umap-plot-colored-by-class"><i class="fa fa-check"></i><b>4.1</b> Part 4a. Create a UMAP plot colored by class</a></li>
+<li class="chapter" data-level="3.1" data-path="part-4.-data-visualization.html"><a href="part-4.-data-visualization.html#part-4a.-create-a-umap-plot-colored-by-class"><i class="fa fa-check"></i><b>3.1</b> Part 4a. Create a UMAP plot colored by class</a></li>
+<li class="chapter" data-level="3.2" data-path="part-4.-data-visualization.html"><a href="part-4.-data-visualization.html#part-4b.-create-a-umap-plot-colored-by-affinity-propagation-clustering"><i class="fa fa-check"></i><b>3.2</b> Part 4b. Create a UMAP plot colored by affinity propagation clustering</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>

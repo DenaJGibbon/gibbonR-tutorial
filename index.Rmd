@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
 
 # Package installation {-}
 You can install the development version from [GitHub](https://github.com/DenaJGibbon) with:
-```{r, echo=T,warning=FALSE, results='hide'}
+```{r, eval=FALSE}
 # install.packages("devtools")
 # devtools::install_github("DenaJGibbon/gibbonR")
 

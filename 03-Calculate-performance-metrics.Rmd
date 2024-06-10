@@ -1,156 +1,183 @@
-# Part 3. Calculate performance metrics
-
-## Part 3a. Prepare data for performance metrics
 ```{r }
-# Set location of test file selection tables
-input.dir.text.files <- "/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/SelectionTables/GibbonTestSelectionTables"
+# Load necessary libraries
+library(stringr)  # For string manipulation
+library(caret)    # For machine learning and model evaluation
+library(ggpubr)   # For data visualization
+library(dplyr)    # For data manipulation
+library(data.table) # For sorting the detections
+library(ggplot2)
 
-Annotatedfiles <- list.files(input.dir.text.files,full.names = T)
+# NOTE you need to change the file paths below to where your files are located on your computer
 
-ListOfAnnotatedFilesShort <- list.files(input.dir.text.files,full.names = F)
+# KSWS Performance Binary --------------------------------------------------------
 
-nslash <- str_count(Annotatedfiles,pattern = '/')[1]+1
-snames <- str_split_fixed(Annotatedfiles,pattern = '/',n=nslash)[,nslash]
+# Get a list of TopModel result files
+TopModelresults <- list.files('/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/DetectAndClassifyOutput',
+                              full.names = TRUE)
 
-all.detections <- data.frame()
-for(x in 1:length(Annotatedfiles)){
-  temp.table <- read.delim2(Annotatedfiles[x],fill = T,header =T)
-  file.name <- str_split_fixed(snames[x],pattern = '[.]',n=2)[,1]
-  recorder <- str_split_fixed(file.name,pattern='_',n=3)[,1]
-  date <- str_split_fixed(file.name,pattern='_',n=3)[,2]
-  time <- str_split_fixed(file.name,pattern='_',n=3)[,3]
-  
-  if(nrow(temp.table >0)){
-    temp.table.updated <- cbind.data.frame(file.name,recorder,date,time,temp.table)
-  } else {
-    temp.row <- as.data.frame(t(rep('NA',ncol(temp.table))))
-    colnames(temp.row) <- colnames(temp.table)
-    temp.table.updated <- cbind.data.frame(file.name,recorder,date,time,temp.row)
-    
+# Get a list of annotation selection table files
+TestDataSet <- list.files('/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/SelectionTables/GibbonTestSelectionTables',
+                          full.names = TRUE)
+
+start.time.buffer <- 12
+end.time.buffer <- 12
+
+# Preallocate space for TopModelDetectionDF
+TopModelDetectionDF <- data.frame()
+
+# Loop through each TopModel result file
+for (f in 1:length(TopModelresults)) {
+
+  # Read the TopModel result table into a data frame
+  TempTopModelTable <- read.delim2(TopModelresults[f])
+
+  # Extract the short name of the TopModel result file
+  ShortName <- basename(TopModelresults[f])
+  ShortName <- str_split_fixed(ShortName, pattern = 'gibbonR', n = 2)[, 1]
+
+  # Find the corresponding annotation selection table
+  testDataIndex <- which(str_detect(TestDataSet, ShortName))
+
+  if(length(testDataIndex) > 0 ){
+  TestDataTable <- read.delim2(TestDataSet[testDataIndex])
+
+
+  # Round Begin.Time..s. and End.Time..s. columns to numeric
+  TestDataTable$Begin.Time..s. <- round(as.numeric(TestDataTable$Begin.Time..s.))
+  TestDataTable$End.Time..s. <- round(as.numeric(TestDataTable$End.Time..s.))
+
+  DetectionList <- list()
+  # Loop through each row in TempTopModelTable
+  for (c in 1:nrow(TempTopModelTable)) {
+    TempRow <- TempTopModelTable[c,]
+
+    # Check if Begin.Time..s. is not NA
+    if (!is.na(TempRow$Begin.Time..s.)) {
+      # Convert Begin.Time..s. and End.Time..s. to numeric
+      TempRow$Begin.Time..s. <- as.numeric(TempRow$Begin.Time..s.)
+      TempRow$End.Time..s. <- as.numeric(TempRow$End.Time..s.)
+
+      # Determine if the time of the detection is within the time range of an annotation
+      TimeBetween <- data.table::between(TempRow$Begin.Time..s.,
+                                         TestDataTable$Begin.Time..s. - start.time.buffer,
+                                         TestDataTable$End.Time..s. + end.time.buffer)
+
+      # Extract the detections matching the time range
+      matched_detections <- TestDataTable[TimeBetween, ]
+
+      if (nrow(matched_detections) > 0) {
+        # Set signal based on the Call.Type in matched_detections
+        TempRow$signal <- 'Gibbon'
+        DetectionList[[length( unlist(DetectionList))+1]] <-  which(TimeBetween == TRUE)
+      } else {
+        # Set signal to 'Noise' if no corresponding annotation is found
+        TempRow$signal <- 'noise'
+      }
+
+      # Append TempRow to TopModelDetectionDF
+      TopModelDetectionDF <- rbind.data.frame(TopModelDetectionDF, TempRow)
+    }
   }
-  all.detections <- rbind.data.frame(all.detections,temp.table.updated)
+
+  # Identify missed detections
+
+  if (length( unlist(DetectionList)) > 0 &  length( unlist(DetectionList)) < nrow(TestDataTable) ) {
+
+    missed_detections <- TestDataTable[-unlist(DetectionList), ]
+    # Prepare missed detections data
+    missed_detections <- missed_detections[, c("Selection", "View", "Channel", "Begin.Time..s.", "End.Time..s.", "Low.Freq..Hz.", "High.Freq..Hz.")]
+    missed_detections <- missed_detections
+    missed_detections$File.Name <- ShortName
+    missed_detections$model.type <- 'SVM'
+    missed_detections$probability <- 0
+    missed_detections$signal <- 'Gibbon'
+
+    # Append missed detections to TopModelDetectionDF
+    TopModelDetectionDF <- rbind.data.frame(TopModelDetectionDF, missed_detections)
+  }
+
+  if (length( unlist(DetectionList)) == 0) {
+
+    missed_detections <- TestDataTable
+    # Prepare missed detections data
+    missed_detections <- missed_detections
+    missed_detections$File.Name <- ShortName
+    missed_detections$model.type <- 'SVM'
+    missed_detections$probability <- 0
+    missed_detections$signal <- 'Gibbon'
+
+    # Append missed detections to TopModelDetectionDF
+    TopModelDetectionDF <- rbind.data.frame(TopModelDetectionDF, missed_detections)
+
+  }
+
+}
 }
 
-```
+head(TopModelDetectionDF)
+nrow(TopModelDetectionDF)
+table(TopModelDetectionDF$signal)
 
-## Part 3b. Identify true and false positives
-```{r }
-  OutputDirectory <-  "/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/DetectAndClassifyOutput"
-    
-  all.combinedprecision.recall.randomiter <- data.frame()
-  range.secs.start <- 6
-  range.secs.end <- 6
-  
-  ### Detections using band-limited energy summation
-  gibbondetects <- OutputDirectory
-  list.ml <-  list.files(gibbondetects, full.names = T, pattern='.wav')
+# Convert signal column to a factor variable
+TopModelDetectionDF$signal <- as.factor(TopModelDetectionDF$signal)
 
-  
-  # Need to focus on gibbons for this validation
-  nslash <- str_count(list.ml[[1]],'/')+1
-  list.ml.signals <- str_split_fixed(list.ml,pattern = '/',n=nslash)[,nslash]
-  
-  list.ml.signals <- str_split_fixed(list.ml.signals,pattern = '_',n=5)[,4]
-  
-  
-  list.ml <- 
-    list.ml[which(list.ml.signals=='female.gibbon')]
-  
-  
-  ml.detection.df <- data.frame()
-  
-  for(y in 1:length(list.ml)){
-    L.wav <- list.ml[[y]]
-    n.slash  <- str_count(L.wav, pattern = "/")[1] + 1
-    
-    det.file.name <- str_split_fixed(L.wav,"/",n=n.slash)[,n.slash]
-    det.file.name <- str_split_fixed(det.file.name,".wav",n=2)[,1]
-    
-    file.name <- paste(str_split_fixed(det.file.name,"_",n=5)[,1],str_split_fixed(det.file.name,"_",n=5)[,2],
-                       str_split_fixed(det.file.name,"_",n=5)[,3], sep='_')
-    det.date <- str_split_fixed(det.file.name,"_",n=5)[,2]
-    det.time <- str_split_fixed(det.file.name,"_",n=5)[,3]
-    det.swift <- str_split_fixed(det.file.name,"_",n=5)[,1]
-    det.time.start <- as.numeric(str_split_fixed(det.file.name,"_",n=9)[,6])
-    det.time.end <- as.numeric(str_split_fixed(det.file.name,"_",n=9)[,7])
-    probability <- str_split_fixed(det.file.name,"_",n=8)[,8]
-    ml.algorithm <- str_split_fixed(det.file.name,"_",n=7)[,5]
-    
-    detections.df <- cbind.data.frame(file.name,det.swift, det.date, det.time,det.time.start,det.time.end,probability,ml.algorithm)
-    
-    ml.detection.df <- rbind.data.frame(ml.detection.df,detections.df)
-  }
-  
-  
-  recall.snr.all.df <- data.frame()
-  for(x in 1:nrow(ml.detection.df)){
-    all.detections.subset <- ml.detection.df[x,]
-    validate.detect.subset <-subset(all.detections,file.name==as.character(all.detections.subset$file.name))
-    validate.detect.subset$Begin.Time..s. <- as.numeric(validate.detect.subset$Begin.Time..s.)
-    min.start.time <- as.numeric(all.detections.subset$det.time.start)-range.secs.start
-    max.start.time <- as.numeric(all.detections.subset$det.time.start)+range.secs.end
-    
-    detections.ml <- subset(validate.detect.subset, Begin.Time..s.>min.start.time & Begin.Time..s.< max.start.time)
-    
-      if(nrow(detections.ml)>0){
-      all.detections.subset$class.label <- '1'
-      } else{
-        all.detections.subset$class.label <- '-1'
-      }
-   
-    recall.snr.all.df <- rbind.data.frame(recall.snr.all.df,all.detections.subset)
-  }
-  
+# Display unique values in the signal column
+unique(TopModelDetectionDF$signal)
 
-```
-## Part 3c. Calculate and plot performance metrics using 'ROCR'
+# Define a vector of confidence Thresholds
+Thresholds <-seq(0.1,1,0.1)
 
-```{r }
-library(ROCR)
+# Create an empty data frame to store results
+BestF1data.frameGibbonBinary <- data.frame()
 
-auc.df <- data.frame()
-performance.df <- data.frame()
+# Loop through each threshold value
+for(a in 1:length(Thresholds)){
 
-  
-  ml.index <- unique(recall.snr.all.df$ml.algorithm)
-  for(m in 1:length(ml.index)){
-  
-    temp.subset <-
-    subset(recall.snr.all.df,
-           ml.algorithm==ml.index[m])
-  
-  predictions <- as.numeric(temp.subset$probability)
-  labels <- (temp.subset$class.label)
-  pred <- prediction(predictions, labels)
-  perf <- performance(pred, "rec", "prec")
-  perfauc <- performance(pred, "aucpr")
-  Precision <- perf@x.values[[1]]
-  Recall <- perf@y.values[[1]]
-  Threshold <- perf@alpha.values[[1]]
-  AUC <- perfauc@y.values[[1]]
-  perfF1 <- performance(pred, "f")
-  F1 <-  perfF1@y.values[[1]]
-  print(AUC)
-  ml.algorithm <- ml.index[m]
-  tempauc <- cbind.data.frame(AUC,ml.algorithm)
-  auc.df <- rbind.data.frame(auc.df,tempauc)
-  
-  temp.performance <- cbind.data.frame(Precision,Recall,Threshold,F1,ml.algorithm)
-  performance.df <- rbind.data.frame(performance.df,temp.performance)
-  
-  perf <- performance(pred, "prec", "rec")
+  # Filter the subset based on the confidence threshold
+  TopModelDetectionDF_single <-TopModelDetectionDF
 
-  plot(perf,
-     avg= "threshold",
-     colorize=TRUE,
-     lwd= 3,
-     main= paste(ml.index[m],'Precision/Recall'))
-  
-plot(perf,
-     lty=3,
-     col="grey78",
-     add=TRUE)
+  TopModelDetectionDF_single$Predictedsignal <-
+    ifelse(TopModelDetectionDF_single$probability  <=Thresholds[a], 'noise','Gibbon')
 
-  }  
+  # Calculate confusion matrix using caret package
+  caretConf <- caret::confusionMatrix(
+    as.factor(TopModelDetectionDF_single$Predictedsignal),
+    as.factor(TopModelDetectionDF_single$signal),positive = 'Gibbon',
+    mode = 'everything')
 
+
+  # Extract F1 score, Precision, and Recall from the confusion matrix
+  F1 <- caretConf$byClass[7]
+  Precision <- caretConf$byClass[5]
+  Recall <- caretConf$byClass[6]
+  FP <- caretConf$table[1,2]
+  TN <- sum(caretConf$table[2,])#+JahooAdj
+  FPR <-  FP / (FP + TN)
+  # Create a row for the result and add it to the BestF1data.frameGreyGibbon
+  #TrainingData <- training_data_type
+  TempF1Row <- cbind.data.frame(F1, Precision, Recall,FPR)
+  TempF1Row$Thresholds <- Thresholds[a]
+  BestF1data.frameGibbonBinary <- rbind.data.frame(BestF1data.frameGibbonBinary, TempF1Row)
+}
+
+BestF1data.frameGibbonBinary
+
+GibbonMax <- round(max(na.omit(BestF1data.frameGibbonBinary$F1)),2)
+
+# Metric plot
+GibbonBinaryPlot <- ggplot(data = BestF1data.frameGibbonBinary, aes(x = Thresholds)) +
+  geom_line(aes(y = F1, color = "F1", linetype = "F1")) +
+  geom_line(aes(y = Precision, color = "Precision", linetype = "Precision")) +
+  geom_line(aes(y = Recall, color = "Recall", linetype = "Recall")) +
+  labs(title = paste("Gibbon automated detection (binary) \n max F1:",GibbonMax),
+       x = "Confidence",
+       y = "Values") +
+  scale_color_manual(values = c("F1" = "blue", "Precision" = "red", "Recall" = "green"),
+                     labels = c("F1", "Precision", "Recall")) +
+  scale_linetype_manual(values = c("F1" = "dashed", "Precision" = "dotted", "Recall" = "solid")) +
+  theme_minimal() +
+  theme(legend.title = element_blank())+
+  labs(color  = "Guide name", linetype = "Guide name", shape = "Guide name")
+
+GibbonBinaryPlot
 ```

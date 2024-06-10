@@ -1,17 +1,16 @@
 # Part 4. Data visualization
 ## Part 4a. Create a UMAP plot colored by class
 ```{r }
-library(gibbonR)
+devtools::load_all('/Users/denaclink/Desktop/RStudioProjects/gibbonR')
 library(ggpubr)
-gibbonID(input.dir="/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/MultipleSoundClasses/",output.dir="/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/MultipleSoundClasses/Thumbnails/",win.avg='standard',add.spectrograms=TRUE,min.freq=400,max.freq=1600,class='no.clustering')
+library(apcluster)
+gibbonID(input.dir="/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/MultipleSoundClasses",output.dir="/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/MultipleSoundClassesThumbnails/",win.avg='standard',add.spectrograms=TRUE,min.freq=400,max.freq=1600,class='no.clustering')
   
 ```
 ## Part 4b. Create a UMAP plot colored by affinity propagation clustering
-```{r }
-library(gibbonR)
-library(ggpubr)
-library(apcluster)
-gibbonID(input.dir="/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/MultipleSoundClasses/",output.dir="/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/MultipleSoundClasses/Thumbnails/",win.avg='standard',class='affinity.fixed', q.fixed=0.1,add.spectrograms=TRUE,min.freq=400,max.freq=1600)
+```{r, eval=FALSE }
+
+gibbonID(input.dir="/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/MultipleSoundClasses",output.dir="/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/MultipleSoundClassesThumbnails/",win.avg='standard',class='affinity.fixed', q.fixed=0.1,add.spectrograms=TRUE,min.freq=400,max.freq=1600)
   
 ```
 

@@ -1,14 +1,16 @@
 # Part 1. Prepare Training Data
-In 'gibbonR' there are two ways that you can format your training data. The first can be a set of labelled .wav clips with the class indicated in the name of the file (e.g., 'gibbon_01.wav' and 'noise_01.wav'). The second is to have a folder of selection tables created in Raven Pro (K. Lisa Yang Center for Conservation Bioacoustics) and a folder with the associated '.wav' files. For the second approach there must be an annotation column indicating the call type and it is assumed that all signals of interest are annotated, and the rest of the files contain only background noise.  
+
+In 'gibbonR' there are two ways that you can format your training data. The first can be a set of labelled .wav clips with the class indicated in the name of the file (e.g., 'gibbon_01.wav' and 'noise_01.wav'). The second is to have a folder of selection tables created in Raven Pro (K. Lisa Yang Center for Conservation Bioacoustics) and a folder with the associated '.wav' files. For the second approach there must be an annotation column indicating the call type and it is assumed that all signals of interest are annotated, and the rest of the files contain only background noise.
 
 ## Download the data from Github
-```{eval=FALSE}
+
+``` {r eval=FALSE}
 # You need to tell R where to store the zip files on your computer.
 destination.file.path.zip <-
   "/Users/denaclink/Downloads/BorneoExampleData.zip"
 
 # You also need to tell R where to save the unzipped files
-destination.file.path <- "/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/"
+destination.file.path <- "/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/"
 
 # This function will download the data from github
 
@@ -25,12 +27,11 @@ list.of.sound.files <- list.files(paste(destination.file.path,
                                           "/"),
                                   full.names = T)
 list.of.sound.files
-
 ```
 
-Use this function to read in the .RDA file and save it as an R object from https://stackoverflow.com/questions/5577221/how-can-i-load-an-object-into-a-variable-name-that-i-specify-from-an-r-data-file
+Use this function to read in the .RDA file and save it as an R object from <https://stackoverflow.com/questions/5577221/how-can-i-load-an-object-into-a-variable-name-that-i-specify-from-an-r-data-file>
 
-```{r eval=FALSE}
+```{r eval=TRUE}
 loadRData <- function(fileName) {
   #loads an RData file, and returns it
   load(fileName)
@@ -39,7 +40,20 @@ loadRData <- function(fileName) {
 ```
 
 This function will load the entire list of r data files
-```{r eval=FALSE}
+
+```{r eval=TRUE}
+devtools::load_all('/Users/denaclink/Desktop/RStudioProjects/gibbonR')
+
+# You also need to tell R where to save the unzipped files
+destination.file.path <- "/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/"
+
+# Examine the contents
+list.of.sound.files <- list.files(paste(destination.file.path,
+                                        "BorneoExampleData-master", "data", sep =
+                                          "/"),
+                                  full.names = T)
+list.of.sound.files
+
 list.rda.files <- list()
 for(x in 1:length(list.of.sound.files)){
   list.rda.files[[x]] <-  loadRData(list.of.sound.files[[x]])
@@ -47,14 +61,18 @@ for(x in 1:length(list.of.sound.files)){
 ```
 
 Assign each rda an informative name
-```{r eval=FALSE, warning=FALSE}
+
+```{r eval=TRUE, warning=FALSE}
 multi.class.list <- list.rda.files[[1]]
 S11_20180219_060002_1800sto3600s <- list.rda.files[[2]]
 ```
 
 Now we create a directory with the training .wav files
-```{r eval=FALSE, warning=FALSE}
-TrainingDataDirectory <- "/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/BorneoMultiClass"
+
+```{r eval=TRUE, warning=FALSE}
+TrainingDataDirectory <- "/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/data/BorneoMultiClass/"
+# Create if doesn't already exist
+dir.create(TrainingDataDirectory,recursive = T)
 
 for(a in 1:length(multi.class.list)){
   Temp.element <- multi.class.list[[a]]
@@ -64,44 +82,71 @@ for(a in 1:length(multi.class.list)){
 ```
 
 ## Part 1A. Training Data with Labeled .wav clips
-### Read in clips and calculate MFCCs
-```{r echo = T, results = 'hide' }
-TrainingWavFilesDir <- 
-  "/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/BorneoMultiClass/"
 
-trainingdata <- gibbonR::MFCCFunction(input.dir=TrainingWavFilesDir, min.freq = 400, max.freq = 1600,win.avg="standard")
+### Read in clips and calculate MFCCs
+
+```{r echo = T, results = 'hide' }
+
+TrainingDataDirectory <- "/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/data/BorneoMultiClass/"
+
+trainingdata <- gibbonR::MFCCFunction(input.dir=TrainingDataDirectory, min.freq = 400, max.freq = 1600,win.avg="standard")
 
 
 trainingdata$class <- as.factor(trainingdata$class)
 ```
 
 ### Compare Random Forest and Support Vector Machine for Supervised Classification
+
+Note that this approach uses k-fold cross-validation by splitting the training data into two splits over multiple iterations.
+
 ```{r }
+# Set seed for reproducilibility
+set.seed(3)
 
-trainingdata$class <- as.factor(trainingdata$class)
+# Create an index to randomly sample 25 observations for test data
+testindex <- sample(1:75,25,replace = FALSE)
 
+# Isolate test data samples
+testdata <- trainingdata[testindex,]
 
-ml.model.svm <- e1071::svm(trainingdata[, 2:ncol(trainingdata)], trainingdata$class, kernel = "radial", 
+# Remove from training data
+trainingdata_sub <- trainingdata[-testindex,]
+
+# Ensure class is a factor
+trainingdata_sub$class <- as.factor(trainingdata_sub$class)
+
+# Run SVM
+ml.model.svm <- e1071::svm(trainingdata_sub[, 2:ncol(trainingdata_sub)], trainingdata_sub$class, kernel = "radial", 
                            cross = 25,
                            probability = TRUE)
 
-print(paste('SVM accuracy',ml.model.svm$tot.accuracy))
+# Predict SVM on test data
+svm.predict.labels <- predict(ml.model.svm,testdata[,-c(1)])
 
+# Create a confusion matrix
+caret::confusionMatrix(svm.predict.labels,testdata$class)
 
-ml.model.rf <- randomForest::randomForest(x=trainingdata[, 2:ncol(trainingdata)], y = trainingdata$class)
+# Run Random Forest
+ml.model.rf <- randomForest::randomForest(x=trainingdata_sub[, 2:ncol(trainingdata_sub)], y = trainingdata_sub$class)
 
+# Predict RF on test data
+rf.predict.labels <- predict(ml.model.rf,testdata[,-c(1)])
 
-print(ml.model.rf)
+# Create a confusion matrix
+caret::confusionMatrix(rf.predict.labels,testdata$class)
+
 ```
 
 ## Part 1B. Training Data with Raven Selection Tables
+
 ### Prepare training data from labeled annotations
+
 ```{r,eval=F }
 # Specify the folder where the training data will be saved
-TrainingDataFolderLocation <- "/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/TrainingDataFromRavenSelectionTables"
+TrainingDataFolderLocation <- "/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/TrainingDataFromRavenSelectionTables"
 
 # Directory with annotated selection tables
-AnnotatedSelectionTables <- list.files("/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/SelectionTables/GibbonTrainingSelectionTables/",
+AnnotatedSelectionTables <- list.files("/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/SelectionTables/GibbonTrainingSelectionTables/",
                                        full.names = T)
 
 # Directory with corresponding .wav files
@@ -138,12 +183,13 @@ for(i in 1: length(AnnotatedSelectionTables)){
 ```
 
 ### Prepare noise training data from files without target signal
+
 ```{r eval=F}
 # Specify the folder where the training data will be saved
-TrainingDataFolderLocation <- "/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/TrainingDataFromRavenSelectionTables/"
+TrainingDataFolderLocation <- "/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/TrainingDataFromRavenSelectionTables/"
 
 # Directory with annotated selection tables
-NoiseSelectionTables <- list.files("/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/SelectionTables/NoiseSelectionTables/",
+NoiseSelectionTables <- list.files("/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/SelectionTables/NoiseSelectionTables/",
                                        full.names = T)
 
 # Directory with corresponding .wav files
@@ -177,10 +223,11 @@ for(i in 1:length(NoiseSelectionTables)){
 ```
 
 ### Now read in clips based on Raven Selection tables and calculate MFCCs
+
 ```{r echo = T, results = 'hide' }
 
 TrainingWavFilesDir <- 
-  "/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/TrainingDataFromRavenSelectionTables/"
+  "/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/TrainingDataFromRavenSelectionTables/"
 
 trainingdata <- gibbonR::MFCCFunction(input.dir=TrainingWavFilesDir, min.freq = 400, max.freq = 1600,win.avg="standard")
 
@@ -189,22 +236,46 @@ trainingdata$class <- as.factor(trainingdata$class)
 ```
 
 ### Compare Random Forest and Support Vector Machine for Supervised Classification
+
 ```{r }
 
-trainingdata$class <- as.factor(trainingdata$class)
+# Set seed for reproducilibility
+set.seed(3)
 
+# Check the structure (this is binary with only two classes)
+table(trainingdata$class) 
 
-ml.model.svm <- e1071::svm(trainingdata[, 2:ncol(trainingdata)], trainingdata$class, kernel = "radial", 
+# Create an index to randomly sample 25 observations for test data
+testindex <- sample(1:53,25,replace = FALSE)
+
+# Isolate test data samples
+testdata <- trainingdata[testindex,]
+
+# Remove from training data
+trainingdata_sub <- trainingdata[-testindex,]
+
+# Ensure class is a factor
+trainingdata_sub$class <- as.factor(trainingdata_sub$class)
+
+# Run SVM
+ml.model.svm <- e1071::svm(trainingdata_sub[, 2:ncol(trainingdata_sub)], trainingdata_sub$class, kernel = "radial", 
                            cross = 25,
                            probability = TRUE)
 
-print(paste('SVM accuracy',ml.model.svm$tot.accuracy))
+# Predict SVM on test data
+svm.predict.labels <- predict(ml.model.svm,testdata[,-c(1)])
 
+# Create a confusion matrix
+caret::confusionMatrix(svm.predict.labels,testdata$class)
 
-ml.model.rf <- randomForest::randomForest(x=trainingdata[, 2:ncol(trainingdata)], y = trainingdata$class)
+# Run Random Forest
+ml.model.rf <- randomForest::randomForest(x=trainingdata_sub[, 2:ncol(trainingdata_sub)], y = trainingdata_sub$class)
 
+# Predict RF on test data
+rf.predict.labels <- predict(ml.model.rf,testdata[,-c(1)])
 
-print(ml.model.rf)
+# Create a confusion matrix
+caret::confusionMatrix(rf.predict.labels,testdata$class)
 
 
 ```

@@ -3,7 +3,7 @@
 ## Part 2a. Feature extraction
 ```{r }
 # Specify the folder where the training data will be saved
-TrainingDataFolderLocation <- "/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/TrainingDataFromRavenSelectionTables/"
+TrainingDataFolderLocation <- "/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/TrainingDataFromRavenSelectionTables/"
   
 TrainingDataMFCC <- MFCCFunction(input.dir= TrainingDataFolderLocation, min.freq = 400, max.freq = 1600,win.avg="standard")
   
@@ -13,11 +13,14 @@ TrainingDataMFCC$class <- as.factor(TrainingDataMFCC$class)
 ## Part 2b. Run the detector/classifier using the 'gibbonR' function.  
 ```{r }
   
-  TestFileDirectory <- '/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/GibbonTestFiles'
+  TestFileDirectory <- '/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/GibbonTestFiles/'
   
-  OutputDirectory <-  "/Users/denaclink/Desktop/RStudio Projects/gibbonR/data/DetectAndClassifyOutput"
+  OutputDirectory <-  "/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/DetectAndClassifyOutput"
+  
+  dir.create(OutputDirectory,recursive = TRUE)
   
   gibbonR(input=TestFileDirectory,
+          input.type = 'directory',
                     feature.df=TrainingDataMFCC,
                     model.type.list=c('SVM','RF'),
                     tune = TRUE,
@@ -34,10 +37,10 @@ TrainingDataMFCC$class <- as.factor(TrainingDataMFCC$class)
                     maximum.separation =1,
                     probability.thresh.svm = 0.15,
                     probability.thresh.rf = 0.15,
-                    wav.output = "TRUE",
+                    wav.output = "FALSE",
                     output.dir =OutputDirectory,
                     swift.time=TRUE,time.start=5,time.stop=10,
-                    write.table.output=FALSE,verbose=TRUE,
+                    write.table.output=TRUE,verbose=TRUE,
                     random.sample='NA')
   
   
