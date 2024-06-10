@@ -19,7 +19,7 @@ TrainingDataMFCC$class <- as.factor(TrainingDataMFCC$class)
   library(gibbonR)
 
   # Specify the folder where the training data will be saved
-TrainingDataFolderLocation <- paste(FolderPath,"/GibbonTestFiles/",
+TestFileDirectory <- paste(FolderPath,"/GibbonTestFiles/",
                                     sep='')
 
 # Specify output directory
@@ -28,6 +28,7 @@ OutputDirectory <-  "data/DetectAndClassifyOutput"
 # Create if doesn't exist  
 dir.create(OutputDirectory,recursive = TRUE)
 
+ 
 # Run the function to detect and classify  
 gibbonR(input=TestFileDirectory,
           input.type = 'directory',

@@ -23,3 +23,4 @@ section
 part-3b.-match-detections-with-human-annotations
 part-3c.-calculate-performance-metrics
 d.-plot-the-results
+load-the-library

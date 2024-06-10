@@ -2,8 +2,17 @@
 
 In 'gibbonR' there are two ways that you can format your training data. The first can be a set of labelled .wav clips with the class indicated in the name of the file (e.g., 'gibbon_01.wav' and 'noise_01.wav'). The second is to have a folder of selection tables created in Raven Pro (K. Lisa Yang Center for Conservation Bioacoustics) and a folder with the associated '.wav' files. For the second approach there must be an annotation column indicating the call type and it is assumed that all signals of interest are annotated, and the rest of the files contain only background noise.
 
-## Download the data from Github
+## Load the library
+``` {r eval=TRUE, warnings=FALSE, message=FALSE}
+# Assume the package is already installed
+library(gibbonR)
 
+# Set location of downloaded data
+FolderPath <- '/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/'
+
+``` 
+
+## Download the data from Github
 ``` {r eval=FALSE}
 # You need to tell R where to store the zip files on your computer.
 destination.file.path.zip <-
@@ -147,9 +156,6 @@ caret::confusionMatrix(rf.predict.labels,testdata$class)
 ### Prepare training data from labeled annotations
 The script below points to a Raven selection table and a correspond .wav file, and uses the selection table to cut out the shorter clips based on the annotation.
 ```{r,eval=F }
-# Change this so that it points to the location on your computer
-FolderPath <- '/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/'
-
 # Specify the folder where the training data will be saved
 TrainingDataFolderLocation <- paste(FolderPath,"/TrainingDataFromRavenSelectionTables/",
                                     sep='')
