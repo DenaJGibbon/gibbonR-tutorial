@@ -1,16 +1,29 @@
 # Part 4. Data visualization
 ## Part 4a. Create a UMAP plot colored by class
-```{r }
-devtools::load_all('/Users/denaclink/Desktop/RStudioProjects/gibbonR')
-library(ggpubr)
-library(apcluster)
-gibbonID(input.dir="/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/MultipleSoundClasses",output.dir="/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/MultipleSoundClassesThumbnails/",win.avg='standard',add.spectrograms=TRUE,min.freq=400,max.freq=1600,class='no.clustering')
+Here we can create a UMAP plot of our training data. The UMAP takes MFCCs as features, and each point represents one training sample. In the plot below the images are colored based on class membership.
+```{r,eval=TRUE,message=FALSE,warning=FALSE,results='hide'}
+library(gibbonR)
+
+gibbonID(input.dir="data/BorneoMultiClass",
+         output.dir="data/BorneoMultiClassthumbnails/",
+         win.avg='standard',
+         add.spectrograms=TRUE,
+         min.freq=400,max.freq=1600,
+         class='no.clustering')
   
 ```
-## Part 4b. Create a UMAP plot colored by affinity propagation clustering
-```{r, eval=FALSE }
 
-gibbonID(input.dir="/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/MultipleSoundClasses",output.dir="/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/MultipleSoundClassesThumbnails/",win.avg='standard',class='affinity.fixed', q.fixed=0.1,add.spectrograms=TRUE,min.freq=400,max.freq=1600)
-  
+## Part 4b. Create a UMAP plot colored by affinity propagation clustering
+In the plot below we use an unsupervised clustering algorithm (affinity propgation clustering) to assign each training sample to a cluster. The spectrogram images below are colored based on cluster assigment.
+```{r, eval=TRUE, message=FALSE,warning=FALSE,results='hide' }
+library(gibbonR)
+
+gibbonID(input.dir="data/BorneoMultiClass",
+         output.dir="data/BorneoMultiClassthumbnails/",
+         win.avg='standard',
+         add.spectrograms=TRUE,
+         min.freq=400,max.freq=1600,
+         class='affinity.fixed')
+
 ```
 

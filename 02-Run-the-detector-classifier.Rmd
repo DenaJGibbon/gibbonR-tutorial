@@ -1,9 +1,13 @@
 # Part 2. Run the detector/classifier
 
 ## Part 2a. Feature extraction
-```{r }
-# Specify the folder where the training data will be saved
-TrainingDataFolderLocation <- "/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/TrainingDataFromRavenSelectionTables/"
+```{r , message= FALSE }
+# Change this so that it points to the location on your computer
+FolderPath <- '/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/'
+
+# Specify the folder where the training data were saved
+TrainingDataFolderLocation <- paste(FolderPath,"/TrainingDataFromRavenSelectionTables/",
+                                    sep='')
   
 TrainingDataMFCC <- MFCCFunction(input.dir= TrainingDataFolderLocation, min.freq = 400, max.freq = 1600,win.avg="standard")
   
@@ -12,17 +16,23 @@ TrainingDataMFCC$class <- as.factor(TrainingDataMFCC$class)
   
 ## Part 2b. Run the detector/classifier using the 'gibbonR' function.  
 ```{r }
-  
-  TestFileDirectory <- '/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/GibbonTestFiles/'
-  
-  OutputDirectory <-  "/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/DetectAndClassifyOutput"
-  
-  dir.create(OutputDirectory,recursive = TRUE)
-  
-  gibbonR(input=TestFileDirectory,
+  library(gibbonR)
+
+  # Specify the folder where the training data will be saved
+TrainingDataFolderLocation <- paste(FolderPath,"/GibbonTestFiles/",
+                                    sep='')
+
+# Specify output directory
+OutputDirectory <-  "data/DetectAndClassifyOutput"
+
+# Create if doesn't exist  
+dir.create(OutputDirectory,recursive = TRUE)
+
+# Run the function to detect and classify  
+gibbonR(input=TestFileDirectory,
           input.type = 'directory',
                     feature.df=TrainingDataMFCC,
-                    model.type.list=c('SVM','RF'),
+                    model.type.list=c('SVM'), # Can specify SVM or RF 
                     tune = TRUE,
                     short.wav.duration=300,
                     target.signal = c("female.gibbon"),

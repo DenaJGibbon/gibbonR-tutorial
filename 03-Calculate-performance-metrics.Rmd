@@ -1,14 +1,15 @@
 # Part 3. Calculate performance metrics
 ## Part 3a. Load libraries and specify file paths
 Please note this script is very much in development!
-```{r }
+```{r ,warning=FALSE, message=FALSE}
 # Load necessary libraries
 library(stringr)  # For string manipulation
 library(caret)    # For machine learning and model evaluation
 library(ggpubr)   # For data visualization
 library(dplyr)    # For data manipulation
 library(data.table) # For sorting the detections
-library(ggplot2)
+library(ggplot2)  # For data visualization
+
 
 # Change this so that it points to the location on your computer
 FolderPath <- '/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/'
@@ -26,7 +27,7 @@ TestDataSet <- list.files( paste(FolderPath,"/SelectionTables/GibbonTestSelectio
 
 ## Part 3b. Match detections with human annotations
 Now we match the detections from the model to human annotations. The start time/end time buffer tells us how much flexibility the detections can have from the start/end time of the call. If the calls are short, then this should be short.
-```{r }
+```{r, warning=FALSE}
 start.time.buffer <- 8
 end.time.buffer <- 4
 
@@ -122,15 +123,17 @@ for (f in 1:length(TopModelresults)) {
 }
 }
 
+# Check the resulting structure
 head(TopModelDetectionDF)
-nrow(TopModelDetectionDF)
+
+# Create table of signals
 table(TopModelDetectionDF$signal)
 ```
 
 
 ## Part 3c. Calculate performance metrics
 Now that we have matched annotations and detections we can calculate performance over a number of thresholds
-```{r }
+```{r,message=FALSE, warning=FALSE}
 # Convert signal column to a factor variable
 TopModelDetectionDF$signal <- as.factor(TopModelDetectionDF$signal)
 
@@ -175,8 +178,8 @@ for(a in 1:length(Thresholds)){
 ```
 
 ## 3d. Plot the results
-We can plot precision, recall, and F1 as a function of the model confidence or threshold. Note that we would expect really great performance, as we only have a small number of training samples. 
-```{r }
+We can plot precision, recall, and F1 as a function of the model confidence or threshold. Note that we would not expect really great performance, as we only have a small number of training samples. 
+```{r, warning=FALSE, message=FALSE }
 
 female.gibbonMax <- round(max(na.omit(BestF1data.framefemale.gibbonBinary$F1)),2)
 

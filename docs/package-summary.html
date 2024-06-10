@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="index.html"/>
-<link rel="next" href="part-1.-prepare-training-data.html"/>
+<link rel="next" href="data-access.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -142,6 +142,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Package installation</a></li>
 <li class="chapter" data-level="" data-path="package-summary.html"><a href="package-summary.html"><i class="fa fa-check"></i>Package summary</a></li>
+<li class="chapter" data-level="" data-path="data-access.html"><a href="data-access.html"><i class="fa fa-check"></i>Data access</a></li>
 <li class="chapter" data-level="1" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html"><i class="fa fa-check"></i><b>1</b> Part 1. Prepare Training Data</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="part-1.-prepare-training-data.html"><a href="part-1.-prepare-training-data.html#download-the-data-from-github"><i class="fa fa-check"></i><b>1.1</b> Download the data from Github</a></li>
@@ -163,10 +164,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1" data-path="part-2.-run-the-detectorclassifier.html"><a href="part-2.-run-the-detectorclassifier.html#part-2a.-feature-extraction"><i class="fa fa-check"></i><b>2.1</b> Part 2a. Feature extraction</a></li>
 <li class="chapter" data-level="2.2" data-path="part-2.-run-the-detectorclassifier.html"><a href="part-2.-run-the-detectorclassifier.html#part-2b.-run-the-detectorclassifier-using-the-gibbonr-function."><i class="fa fa-check"></i><b>2.2</b> Part 2b. Run the detector/classifier using the ‘gibbonR’ function.</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="part-4.-data-visualization.html"><a href="part-4.-data-visualization.html"><i class="fa fa-check"></i><b>3</b> Part 4. Data visualization</a>
+<li class="chapter" data-level="3" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html"><i class="fa fa-check"></i><b>3</b> Part 3. Calculate performance metrics</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="part-4.-data-visualization.html"><a href="part-4.-data-visualization.html#part-4a.-create-a-umap-plot-colored-by-class"><i class="fa fa-check"></i><b>3.1</b> Part 4a. Create a UMAP plot colored by class</a></li>
-<li class="chapter" data-level="3.2" data-path="part-4.-data-visualization.html"><a href="part-4.-data-visualization.html#part-4b.-create-a-umap-plot-colored-by-affinity-propagation-clustering"><i class="fa fa-check"></i><b>3.2</b> Part 4b. Create a UMAP plot colored by affinity propagation clustering</a></li>
+<li class="chapter" data-level="3.1" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html#part-3a.-load-libraries-and-specify-file-paths"><i class="fa fa-check"></i><b>3.1</b> Part 3a. Load libraries and specify file paths</a></li>
+<li class="chapter" data-level="3.2" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html#part-3b.-match-detections-with-human-annotations"><i class="fa fa-check"></i><b>3.2</b> Part 3b. Match detections with human annotations</a></li>
+<li class="chapter" data-level="3.3" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html#part-3c.-calculate-performance-metrics"><i class="fa fa-check"></i><b>3.3</b> Part 3c. Calculate performance metrics</a></li>
+<li class="chapter" data-level="3.4" data-path="part-3.-calculate-performance-metrics.html"><a href="part-3.-calculate-performance-metrics.html#d.-plot-the-results"><i class="fa fa-check"></i><b>3.4</b> 3d. Plot the results</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="part-4.-data-visualization.html"><a href="part-4.-data-visualization.html"><i class="fa fa-check"></i><b>4</b> Part 4. Data visualization</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="part-4.-data-visualization.html"><a href="part-4.-data-visualization.html#part-4a.-create-a-umap-plot-colored-by-class"><i class="fa fa-check"></i><b>4.1</b> Part 4a. Create a UMAP plot colored by class</a></li>
+<li class="chapter" data-level="4.2" data-path="part-4.-data-visualization.html"><a href="part-4.-data-visualization.html#part-4b.-create-a-umap-plot-colored-by-affinity-propagation-clustering"><i class="fa fa-check"></i><b>4.2</b> Part 4b. Create a UMAP plot colored by affinity propagation clustering</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -192,9 +200,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1>Package summary<a href="package-summary.html#package-summary" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>‘gibbonR’ has functions to:<br />
 + detect sound events using band-limited energy summation (DetectBLED)
-+ detect and classify sound events using random forest or support vector machine algorithms (gibbonR)<br />
-+ visualize sound events using UMAP plots with affinity propagation lcustering (gibbonID)</p>
-
++ detect and classify sound events using random forest or support vector machine algorithms (gibbonR)
++ visualize sound events using UMAP plots with affinity propagation clustering (gibbonID)</p>
 </div>
             </section>
 
@@ -202,7 +209,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="part-1.-prepare-training-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="data-access.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

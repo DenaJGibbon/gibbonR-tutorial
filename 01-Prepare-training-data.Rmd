@@ -241,20 +241,22 @@ for(i in 1:length(NoiseSelectionTables)){
 
 ```{r echo = T, results = 'hide' }
 
-TrainingWavFilesDir <- 
-  "/Users/denaclink/Library/CloudStorage/Box-Box/gibbonRSampleFiles/TrainingDataFromRavenSelectionTables/"
+TrainingDataFolderLocation <- paste(FolderPath,"/TrainingDataFromRavenSelectionTables/",
+                                    sep='')
 
-trainingdata <- gibbonR::MFCCFunction(input.dir=TrainingWavFilesDir, min.freq = 400, max.freq = 1600,win.avg="standard")
+trainingdata <- gibbonR::MFCCFunction(input.dir=TrainingDataFolderLocation, min.freq = 400, max.freq = 1600,win.avg="standard")
 
 
 trainingdata$class <- as.factor(trainingdata$class)
+
+table(trainingdata$class )
 ```
 
 ### Compare Random Forest and Support Vector Machine for Supervised Classification
 
 ```{r }
 
-# Set seed for reproducilibility
+# Set seed for reproducibility
 set.seed(3)
 
 # Check the structure (this is binary with only two classes)
